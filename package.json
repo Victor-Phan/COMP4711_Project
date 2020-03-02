@@ -1,0 +1,22 @@
+{
+  "name": "comp4711_project",
+  "version": "1.0.0",
+  "description": "Final project for BCIT COMP4711 ",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hchho/COMP4711_Project.git"
+  },
+  "author": "Henry Ho, Tomas Quat, Victor Phan, Zafir Damani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hchho/COMP4711_Project/issues"
+  },
+  "homepage": "https://github.com/hchho/COMP4711_Project#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
