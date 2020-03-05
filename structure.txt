@@ -1,0 +1,18 @@
+SERVER
+home
+|
+|---/login [GET, POST]
+|
+|---/signup [GET, POST]
+|
+|---/search?=params [GET]
+|
+|---/users [GET]
+|       |
+|       |---/:user_id [GET]
+|             |
+|             |---/message [GET, POST]
+|
+|---/messages [GET]
+        |
+        |---/:user_id [GET]
