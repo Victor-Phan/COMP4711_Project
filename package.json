@@ -2,10 +2,10 @@
   "name": "comp4711_project",
   "version": "1.0.0",
   "description": "Final project for BCIT COMP4711 ",
-  "main": "server/index.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "nodemon server/index",
-    "start": "node server/index",
+    "dev": "nodemon index",
+    "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

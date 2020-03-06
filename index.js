@@ -10,19 +10,19 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.engine(
   "hbs",
   expressHbs({
-    layoutsDir: "client/views/layouts/",
+    layoutsDir: "views/layouts/",
     defaultLayout: "main-layout",
     extname: "hbs"
   })
 );
 
 app.set("view engine", "hbs");
-app.set("views", "client/views");
+app.set("views", "views");
 
 app.get("/", (req, res) => res.send("Hello world"))
 
