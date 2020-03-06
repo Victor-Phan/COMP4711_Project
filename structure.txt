@@ -4,6 +4,8 @@ home
 |
 |---/signup [GET, POST]
 |
+|---/profile [GET]
+|
 |---/search?=params [GET]
 |
 |---/users [GET]
