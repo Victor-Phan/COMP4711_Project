@@ -2,7 +2,7 @@ const {promisifyQuery} = require('./helperFunctions.js');
 
 function insertMessage(e) {
     let {sender_id, recipient_id, subject, message} = e;
-    let sql = `INSERT INTO c4711_finalproject.message (sender_id, recipient_id, subject, message) 
+    let sql = `INSERT INTO message (sender_id, recipient_id, subject, message) 
                VALUES (${sender_id}, ${recipient_id}, ${subject}, ${message})`;
     return promisifyQuery(sql);
 }
