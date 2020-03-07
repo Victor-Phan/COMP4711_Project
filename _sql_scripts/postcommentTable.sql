@@ -5,9 +5,9 @@ CREATE TABLE `c4711_finalproject`.`postcomment` (
   `comment` VARCHAR(200) NOT NULL,
   `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `FK_postcommet_post_idx` (`post_id` ASC),
+  INDEX `FK_postcomment_post_idx` (`post_id` ASC),
   INDEX `FK_postcomment_user_idx` (`user_id` ASC),
-  CONSTRAINT `FK_postcommet_post`
+  CONSTRAINT `FK_postcomment_post`
     FOREIGN KEY (`post_id`)
     REFERENCES `c4711_finalproject`.`post` (`id`)
     ON DELETE NO ACTION
