@@ -3,12 +3,10 @@ const express = require("express");
 const express_session = require("express-session");
 const path = require("path");
 const expressHbs = require("express-handlebars");
-const passport = require("passport");
 const methodOverride = require("method-override");
-const LocalStrategy = require("passport-local").Strategy;
 
 const { authRoutes } = require("./routes");
-const { errorHandlers } = require("./utils");
+const { authHandlers, errorHandlers } = require("./utils");
 
 const app = express();
 
@@ -20,16 +18,13 @@ app.use(methodOverride());
 
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.use(
-//   express_session({
-//     secret: process.env.SECRET || "keyboard cat",
-//     resave: true,
-//     saveUninitialized: true
-//   })
-// );
-
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(
+  express_session({
+    secret: process.env.SECRET || "keyboard cat",
+    resave: true,
+    saveUninitialized: true
+  })
+);
 
 app.engine(
   "hbs",
@@ -45,6 +40,16 @@ app.set("views", "views");
 
 app.get("/", (req, res) => res.send("Hello world"));
 app.use(authRoutes);
+
+// This must be after authenticated routes
+app.get("*", authHandlers.checkSignin);
+app.use("*", (err, req, res, next) => {
+  if (err) {
+    res.redirect("/login");
+  } else {
+    next();
+  }
+});
 
 app.use(errorHandlers.errorLogger);
 app.use(errorHandlers.clientErrorHandler);
