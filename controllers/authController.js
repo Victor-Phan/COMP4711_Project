@@ -48,9 +48,11 @@ exports.signin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const data = await user.getUserByEmail(email);
-    const validUser = data[0];
 
     if (data.length == 0) throw new Error("No such user");
+
+    const validUser = data[0];
+
     if (!(await isPasswordValid(password, validUser.password)))
       throw new Error("Invalid password");
 
