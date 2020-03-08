@@ -41,7 +41,7 @@ app.set("views", "views");
 app.get("/", (req, res) => res.send("Hello world"));
 app.use(authRoutes);
 
-// This must be after authenticated routes
+// This must be after authentication routes
 app.get("*", authHandlers.checkSignin);
 app.use("*", (err, req, res, next) => {
   if (err) {
