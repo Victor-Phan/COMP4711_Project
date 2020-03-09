@@ -38,15 +38,15 @@ app.engine(
 app.set("view engine", "hbs");
 app.set("views", "views");
 
-app.get("/", (req, res) => res.send("Hello world"));
 app.use(authRoutes);
 
-// This must be after authentication routes
-app.get("*", authHandlers.checkSignin);
-app.use("*", (err, req, res, next) => {
+// This must be after authentication routes and before secure routes
+app.use("/*", authHandlers.checkSignin)
+app.use("/*", (err, req, res, next) => {
   if (err) {
-    res.redirect("/login");
+    res.redirect("/signin");
   } else {
+    console.log("Going next")
     next();
   }
 });
