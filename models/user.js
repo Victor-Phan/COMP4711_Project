@@ -3,7 +3,7 @@ const { promisifyQuery } = require('./helperFunctions.js');
 function insertUser(e) {
     let { first_name, last_name, email, password, image_url, about, country, dob } = e;
     let sql = `INSERT INTO user (first_name, last_name, email, password, image_url, about, country, dob) 
-               VALUES (${first_name}, ${last_name}, ${email}, ${password}, ${image_url}, ${about}, ${country}, ${dob})`;
+               VALUES ('${first_name}', '${last_name}', '${email}', '${password}', '${image_url}', '${about}', '${country}', '${dob}')`;
     return promisifyQuery(sql);
 }
 
@@ -35,10 +35,16 @@ function getAllUsersDetail() {
     return promisifyQuery(sql);
 }
 
+function getUserByEmail(email) {
+    let sql = `SELECT * FROM user where email = '${email}'`;
+    return promisifyQuery(sql);
+}
+
 module.exports = {
     insertUser: insertUser,
     updateUser: updateUser,
     getUser: getUser,
+    getUserByEmail,
     getUserDetails: getUserDetails,
     getAllUsersDetail: getAllUsersDetail
 }
