@@ -1,0 +1,28 @@
+<div class ="questionAsk"
+    <h2>what's your question today?</h2>
+    <div class="postQuestion">
+        <form class="createQuestion" method="POST" action=" <!--create an action-->">
+            <input class="subject" name="subject" placeholder="subject" />
+            <textarea name="details" placeholder="explain in detail ..." rows="5"></textarea>
+            <div class="selector">
+                <select class="topics">
+                    <option value="nodejs">nodejs</option>
+                    <option value="sql">SQL</option>
+                    <option value="cpp">C++</option>
+                    <option value="datacomm">Data Comm</option>
+                </select>
+                <button class="postBtn">post to timeline</button>
+            </div>
+        </form>
+        <div>
+            <h4>Search by topic</h4>
+            <select class="topics" id="topicsSearch">
+                <option value="nodejs">nodejs</option>
+                <option value="sql">SQL</option>
+                <option value="cpp">C++</option>
+                <option value="datacomm">Data Comm</option>
+            </select>
+            <button onClick=''>go-></button>
+        </div>
+    </div>
+</div>
