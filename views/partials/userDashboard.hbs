@@ -1,0 +1,15 @@
+<div class="userDesc">
+    <div class="userInfo">
+        <img src="{{context.personUrl}}">
+        <p>{{context.firstName}} {{context.lastName}}</p>
+        <span>{{context.desc}}</span>
+    </div>
+    <div class="userStats">
+        <ul>
+            <li><a href="/posts/">Posts</a><span>{{context.postsNum}}</span></li>
+            <li><a href="/messages/">Messages</a><span>{{context.msgsNum}}</span></li>
+            <li>Likes<span>{{context.likeNum}}</span></li>
+            <li><a href="/edit/">Edit Profile</a></li>
+        </ul>
+    </div>
+</div>
