@@ -1,0 +1,65 @@
+<div class="navbar">
+    <img  <a href="/"><img id="kbImg" src="./img/kb.png" /></a>
+    <div>
+        <!--insert search bar here-->
+    </div>
+    <div class="logoutBtn">
+        <button id="logoutButton" onclick="" type="submit">logout</button>
+    </div>
+</div>
+<div class="userDesc">
+    <div class="userInfo">
+        <img src="{{context.personUrl}}">
+        <p>{{context.firstName}} {{context.lastName}}</p>
+        <span>{{context.desc}}</span>
+    </div>
+    <div class="userStats">
+        <ul>
+            <li><a href="/posts/">Posts</a><span>{{context.postsNum}}</span></li>
+            <li><a href="/messages/">Messages</a><span>{{context.msgsNum}}</span></li>
+            <li>Likes<span>{{context.likeNum}}</span></li>
+            <li><a href="/edit/">Edit Profile</a></li>
+        </ul>
+    </div>
+</div>
+<div class="questions">
+    <h2>what's your question today?</h2>
+    <div class="postQuestion">
+        <form class="createQuestion" method="POST" action=" <!--create an action-->">
+            <input class="subject" name="subject" placeholder="subject" />
+            <textarea name="details" placeholder="explain in detail ..." rows="5"></textarea>
+            <div class="selector">
+                <select class="topics">
+                    <option value="nodejs">nodejs</option>
+                    <option value="sql">SQL</option>
+                    <option value="cpp">C++</option>
+                    <option value="datacomm">Data Comm</option>
+                </select>
+                <button class="postBtn">post to timeline</button>
+            </div>
+        </form>
+        <div>
+            <h4>Search by topic</h4>
+            <select class="topics" id="topicsSearch">
+                <option value="nodejs">nodejs</option>
+                <option value="sql">SQL</option>
+                <option value="cpp">C++</option>
+                <option value="datacomm">Data Comm</option>
+            </select>
+            <button onClick=''>go-></button>
+        </div>
+        <div class="discussionList">
+            <h3>>Latest Discussions</h3>
+            <div class="discussionListBox">
+                <div class="indivDiscussion">
+                    <div class="userIcon">
+
+                    </div>
+                    <div class="questiontext">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
