@@ -1,0 +1,42 @@
+<!-- not complete with all the actions yet-->
+{{> search}}
+<div class="topSection">
+    <div class="leftTop">
+        <div class="userImg">
+            <!-- user image here-->
+        </div>
+        <div class="userInfo">
+            <p id="userName">
+                {{user.FIRST_NAME}} {{user.LAST_NAME}}
+            </p>
+            <p id="userQualifications">
+                {{user.QUALIFICATIONS}}
+            </p>
+            <p id="userCountry">
+                {{user.COUNTRY}}
+            </p>
+        </div>
+    </div>
+    <div class="rightTop">
+        <button id="message" type="submit">Message</button>
+        <div class="likes">
+            <p>
+              {{likes.COUNT}} Likes
+            </p>
+            <button type="submit" id="like">+</button>
+        </div>
+        <div class="posts">
+            <p>
+                {{posts.COUNT}} Posts
+            </p>
+        </div>
+    </div>
+</div>
+<div class="bottomSection">
+    <div class="allPosts">
+        <p>All posts by {{user.FIRST_NAME}}</p>
+    </div>
+    <div class="postList">
+        <!--Discussion post list partial here-->
+    </div>
+</div>
