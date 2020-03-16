@@ -43,10 +43,9 @@ app.use(authRoutes);
 // This must be after authentication routes and before secure routes
 app.use("/*", authHandlers.checkSignin)
 app.use("/*", (err, req, res, next) => {
-  if (err) {
+  if (err && err.message === "User not signed in") {
     res.redirect("/signin");
   } else {
-    console.log("Going next")
     next();
   }
 });
