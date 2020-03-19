@@ -12,10 +12,7 @@ router.post("/signout", authController.signout);
 
 router.get("/signin", (req, res) => res.render("landingPage", {}));
 
-//router.get("/signin", (req, res) => res.render("unauthLandingPage", {})); // This is just a dummy for testing
+router.get("/signup", (req, res) => res.render("signupPage",{})); 
 
-router.get("/signup", (req, res) => res.render("signupDetails",{})); // This is just a dummy for testing
-
-//router.get("/signup", (req, res) => res.send("Sign up form")); // This is just a dummy for testing
 
 module.exports = router;
