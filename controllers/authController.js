@@ -49,15 +49,16 @@ exports.signin = async (req, res, next) => {
     const { email, password } = req.body;
     const data = await user.getUserByEmail(email);
 
-    if (data.length == 0) throw new Error("No such user");
+    if (data.length == 0) {
+      throw new Error("No such user");
+    }
 
     const validUser = data[0];
-
     if (!(await isPasswordValid(password, validUser.password)))
       throw new Error("Invalid password");
 
     req.session.user = { email: validUser.email, id: validUser.id };
-    res.send(req.session.user);
+    res.redirect("/");
   } catch (e) {
     next(e);
   }

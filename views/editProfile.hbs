@@ -1,0 +1,33 @@
+<!--This page allows user to edit their profile information-->
+{{>nav_bar}}
+<div class="editProfile">
+    <form method="POST" action="/edit">
+        <div class="firstName">
+            <label>Edit your First Name:</label>
+            <input type="text" name="firstname" placeholder="{{user.firstname}}">
+        </div>
+        <div class="lastName">
+            <label>Edit your Last Name:</label>
+            <input type="text" name="lastname" placeholder="{{user.lastname}}">
+        </div>
+        <div class="country">
+            <label>Edit your Country:</label>
+            <input type="text" name="country" placeholder="{{user.country}}">
+        </div>
+        <div class="profileURL">
+            <label>Edit your profile image URL:</label>
+            <input type="text" name="img" placeholder="{{user.img}}">
+        </div>
+        <div class="DOB">
+             <label>Edit your Date Of Birth:</label>
+            <input type="text" name="dob" placeholder="{{user.dob}}">
+        </div>
+        <div class="about">
+             <label>Edit your About information:</label>
+            <input type="text" name="about" placeholder="{{user.about}}">
+        </div>
+        <div class="update">
+            <button type="submit" id="input" >Update Profile</button>
+        </div>
+    </form>
+</div>

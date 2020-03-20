@@ -1,0 +1,35 @@
+<!--Conversation page with list of conversations
+Not yet completed-->
+<div class="conversation">
+    {{> nav_bar}}
+    <div class="sidebar">
+        <table>
+            <!--not sure about this. fix?-->
+            {{#each conversations}}
+            <tr>
+                <td>
+                    <div class="convo">
+                        <div class="userImg">
+                            <!--include user img here-->
+                        </div>
+                        <p class="userName">
+                            {{this.firstname}} {{this.lastname}}
+                        </p>
+                    </div>
+                    <div class="info">
+                        {{this.date}} {{this.topic}}
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+    <div class="messages">
+        <!--not fully completed yet-->
+        <div class="entryBox">
+            <textarea class="entryText" rows="4" placeholder="Write a message..."></textarea>
+        </div>
+        <!--need a method for send-->
+        <button type='button' class='sendBtn' onclick="send()">Send</button>
+     </div>   
+</div>

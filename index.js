@@ -41,15 +41,19 @@ app.set("views", "views");
 app.use(authRoutes);
 
 // This must be after authentication routes and before secure routes
-app.use("/*", authHandlers.checkSignin)
+app.use("/*", authHandlers.checkSignin);
 app.use("/*", (err, req, res, next) => {
   if (err) {
-    res.redirect("/signin");
+    if (err.message === "User not signed in") {
+      res.redirect("/signin");
+    }
+    next(err);
   } else {
-    console.log("Going next")
     next();
   }
 });
+
+app.get("/", (req, res) => res.render("home", {}));
 
 app.use(errorHandlers.errorLogger);
 app.use(errorHandlers.clientErrorHandler);

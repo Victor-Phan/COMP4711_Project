@@ -1,0 +1,13 @@
+<!--When a user clicks on the Message button, this page loads for messaging.-->
+{{> nav_bar}}
+<div class="message">
+    <div id="userPic">
+         <img <!--Insert user pic here-->>
+    </div>
+    <div>
+        <form method="POST" action="/message"></form>
+        <input placeholder="subject" name="subject"  type="text">
+        <textarea placeholder="message details..." rows="3" type="text" name="messageDetails"></textarea>
+        <button type="submit" class="messageBtn">Message</button>
+    </div>
+</div>
