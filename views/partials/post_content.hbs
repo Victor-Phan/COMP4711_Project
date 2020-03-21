@@ -19,11 +19,11 @@
           {{this.timestamp}}
         </span>
         <span class="search-results--item-replies-count">
-          {{this.numberOfReplies}} replies
+          {{this.numberOfReplies.count}} replies
         </span>
       </div>
       <div class="search-results--item-replies">
-        {{#each replies}}
+        {{#each this.replies}}
         <div class="post--reply-container">
           <div class="post--reply-thumbnail">
             <img src="" alt="{{this.user_id}}" />
@@ -33,7 +33,7 @@
           </div>
         </div>
         {{/each}}
-        <form action="/postcomment/{{this.post_id}}" method="POST">
+        <form action="/postcomment/{{this.id}}" method="POST">
           <input type="text" placeholder="add your reply..." name="comment" />
           <input type="submit" value="Add comment" />
         </form>
