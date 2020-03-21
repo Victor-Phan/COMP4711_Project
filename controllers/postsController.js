@@ -38,3 +38,20 @@ exports.search = async (req, res, next) => {
     next(err)
   }
 };
+
+exports.getOne = async (req, res, next) => {
+  try {
+    const { post_id } = req.params
+    const data = await post.getOnePost(post_id)
+
+    if (data.length == 0) {
+      throw new Error(`No such post with id: ${post_id}`)
+    }
+
+    const result = data[0]
+
+    return res.render("post", { post: result })
+  } catch (err) {
+    next(err)
+  }
+}

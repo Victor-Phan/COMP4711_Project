@@ -5,7 +5,13 @@ const path = require("path");
 const expressHbs = require("express-handlebars");
 const methodOverride = require("method-override");
 
-const { authRoutes, postsRoutes, searchRoutes } = require("./routes");
+const {
+  authRoutes,
+  postCommentRoutes,
+  postsRoutes,
+  searchRoutes
+} = require("./routes");
+
 const { authHandlers, errorHandlers } = require("./utils");
 
 const app = express();
@@ -55,6 +61,7 @@ app.use("/*", (err, req, res, next) => {
 
 app.get("/", (req, res) => res.render("home", {}));
 
+app.use(postCommentRoutes);
 app.use(postsRoutes);
 app.use(searchRoutes);
 
