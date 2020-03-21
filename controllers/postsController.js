@@ -33,7 +33,7 @@ exports.search = async (req, res, next) => {
       return Object.assign({}, post, { numberOfReplies, replies })
     })
 
-    res.render("searchResults", { posts: result, searchResultsCSS: true })
+    return res.render("searchResults", { posts: result, searchResultsCSS: true })
   } catch (err) {
     next(err)
   }
