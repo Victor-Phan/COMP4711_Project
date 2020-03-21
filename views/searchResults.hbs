@@ -1,0 +1,45 @@
+<div class="search-results--container">
+  {{#each posts}}
+  <div class="search-results--item">
+    <div class="search-results--item-thumbnail">
+      <img src="" alt="{{this.user_id}}" />
+    </div>
+    <div class="search-results--item-contents">
+      <div class="search-results--item-contents-header">
+        <span class="search-results--item-contents-subject">
+          {{this.subject}}
+        </span>
+        <span class="search-results--item-contents-type">
+          {{this.type}}
+        </span>
+      </div>
+      <div class="search-results--item-contents-message">
+        {{this.message}}
+      </div>
+      <div class="search-results--item-footer">
+        <span class="search-results--item-date">
+          {{this.timestamp}}
+        </span>
+        <span class="search-results--item-replies-count">
+          {{this.numberOfReplies}} replies
+        </span>
+      </div>
+      <div class="search-results--item-replies">
+        {{#each replies}}
+        <div class="post--reply-container">
+          <div class="post--reply-thumbnail">
+            <img src="" alt="{{this.user_id}}" />
+          </div>
+          <div class="post--reply-comment">
+            {{this.comment}}
+          </div>
+        </div>
+        {{/each}}
+        <form action="/postcomment/{{this.post_id}}" method="POST">
+          <input type="text" placeholder="add your reply..." name="comment" />
+        </form>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
