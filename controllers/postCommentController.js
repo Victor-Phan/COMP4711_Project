@@ -1,0 +1,15 @@
+const { postcomment } = require("../models")
+
+exports.add = (req, res, next) => {
+  try {
+    const { post_id } = req.params
+    const { id: user_id } = req.session.user
+    const { comment } = req.body
+    
+    await postcomment.insertPostComment({ post_id, user_id, comment })
+
+    return res.redirect(`/posts/${post_id}`)
+  } catch (err) {
+    next(err)
+  }
+}
