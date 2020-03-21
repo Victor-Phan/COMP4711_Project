@@ -5,7 +5,7 @@ const path = require("path");
 const expressHbs = require("express-handlebars");
 const methodOverride = require("method-override");
 
-const { authRoutes } = require("./routes");
+const { authRoutes, postsRoutes, searchRoutes } = require("./routes");
 const { authHandlers, errorHandlers } = require("./utils");
 
 const app = express();
@@ -45,7 +45,7 @@ app.use("/*", authHandlers.checkSignin);
 app.use("/*", (err, req, res, next) => {
   if (err) {
     if (err.message === "User not signed in") {
-      res.redirect("/signin");
+      return res.redirect("/signin");
     }
     next(err);
   } else {
@@ -54,6 +54,9 @@ app.use("/*", (err, req, res, next) => {
 });
 
 app.get("/", (req, res) => res.render("home", {}));
+
+app.use(postsRoutes);
+app.use(searchRoutes);
 
 app.use(errorHandlers.errorLogger);
 app.use(errorHandlers.clientErrorHandler);

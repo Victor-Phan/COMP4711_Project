@@ -3,7 +3,7 @@ const {promisifyQuery} = require('./helperFunctions.js');
 function insertPost(e) {
     let {user_id, type, subject, message} = e;
     let sql = `INSERT INTO post (user_id, type, subject, message) 
-               VALUES (${user_id}, ${type}, ${subject}, ${message})`;
+               VALUES ("${user_id}", "${type}", "${subject}", "${message}")`;
     return promisifyQuery(sql);
 }
 

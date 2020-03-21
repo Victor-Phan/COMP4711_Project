@@ -1,5 +1,18 @@
 const { post, postcomment } = require("../models");
 
+exports.add = async (req, res, next) => {
+  try {
+    const newPost = req.body
+    newPost.user_id = req.session.user.id
+
+    await post.insertPost(newPost)
+    
+    return res.send(newPost)
+  } catch (err) {
+    next(err)
+  }
+}
+
 exports.search = async (req, res, next) => {
   try {
     let { type, subject } = req.query
@@ -12,11 +25,7 @@ exports.search = async (req, res, next) => {
       throw new Error("Invalid search")
     }
 
-    if (data.length == 0) {
-      throw new Error(`No such type or subject: ${type || subject}`);
-    }
-
-    const result = data[0];
+    const result = data;
 
     result.map(async post => {
       const numberOfReplies = await postcomment.getNumberComments(post.id)

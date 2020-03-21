@@ -38,7 +38,7 @@ exports.signup = async (req, res, next) => {
 
     await user.insertUser(newUser);
     req.session.user = { email: newUser.email };
-    res.send(req.session.user);
+    return res.send(req.session.user);
   } catch (e) {
     next({ ...e, message: "Error signing user" });
   }
@@ -58,7 +58,7 @@ exports.signin = async (req, res, next) => {
       throw new Error("Invalid password");
 
     req.session.user = { email: validUser.email, id: validUser.id };
-    res.redirect("/");
+    return res.redirect("/");
   } catch (e) {
     next(e);
   }
@@ -66,5 +66,5 @@ exports.signin = async (req, res, next) => {
 
 exports.signout = (req, res) => {
   req.session.destroy(() => console.log("User signed out"));
-  res.redirect("/signin");
+  return res.redirect("/signin");
 };
