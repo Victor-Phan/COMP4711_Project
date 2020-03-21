@@ -8,7 +8,7 @@ function insertPost(e) {
 }
 
 function getOnePost(id) {
-  let sql = `SELECT * FROM post WHERE id == ${id}`;
+  let sql = `SELECT * FROM post WHERE id = ${id}`;
   return promisifyQuery(sql);
 }
 
