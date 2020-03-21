@@ -2,12 +2,14 @@
 {{> nav_bar}}
 <div class="message">
     <div id="userPic">
-         <img <!--Insert user pic here-->>
+        <!--Temp placeholder image-->
+         <img src="https://randomuser.me/api/portraits/med/women/2.jpg" id="pic">
     </div>
     <div>
-        <form method="POST" action="/message"></form>
-        <input placeholder="subject" name="subject"  type="text">
-        <textarea placeholder="message details..." rows="3" type="text" name="messageDetails"></textarea>
-        <button type="submit" class="messageBtn">Message</button>
+        <form method="POST" action="/message">
+            <input placeholder="subject" name="subject"  type="text">
+            <textarea placeholder="message details..." rows="3" type="text" name="messageDetails"></textarea>
+            <button type="submit" class="button button--message-submit">Message</button>
+        </form>
     </div>
 </div>

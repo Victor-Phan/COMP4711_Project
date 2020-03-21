@@ -14,5 +14,7 @@ router.get("/signin", (req, res) => res.render("landingPage", {}));
 
 router.get("/signup", (req, res) => res.render("signupPage",{})); 
 
+router.get("/message", (req, res) => res.render("messaging",{})); 
+
 
 module.exports = router;
