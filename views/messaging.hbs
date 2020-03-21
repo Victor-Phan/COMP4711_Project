@@ -1,14 +1,14 @@
 <!--When a user clicks on the Message button, this page loads for messaging.-->
 {{> nav_bar}}
 <div class="message">
-    <div id="userPic">
+    <div class="div-userPic">
         <!--Temp placeholder image-->
-         <img src="https://randomuser.me/api/portraits/med/women/2.jpg" id="pic">
+         <img class="img-userPic"src="https://randomuser.me/api/portraits/med/women/2.jpg" >
     </div>
-    <div>
+    <div class="div-form-message">
         <form method="POST" action="/message">
-            <input placeholder="subject" name="subject"  type="text">
-            <textarea placeholder="message details..." rows="3" type="text" name="messageDetails"></textarea>
+            <input class="input-subject" placeholder="subject" name="subject"  type="text">
+            <textarea class="textarea-messageDetails" placeholder="message details..." rows="7" type="text" name="messageDetails"></textarea>
             <button type="submit" class="button button--message-submit">Message</button>
         </form>
     </div>

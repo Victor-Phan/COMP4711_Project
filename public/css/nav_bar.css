@@ -1,6 +1,8 @@
 .img-logo-kb{
     width: 5%;
     display: inline-block;
+    position: relative;
+    top:20px;
 }
 
 .form-search{
