@@ -1,6 +1,6 @@
 const { postcomment } = require("../models")
 
-exports.add = (req, res, next) => {
+exports.add = async (req, res, next) => {
   try {
     const { post_id } = req.params
     const { id: user_id } = req.session.user
