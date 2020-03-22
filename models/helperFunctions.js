@@ -12,5 +12,5 @@ function promisifyQuery(sql) {
 }
 
 module.exports = {
-  promisifyQuery: promisifyQuery
+  promisifyQuery
 };
