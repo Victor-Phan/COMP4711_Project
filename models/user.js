@@ -26,7 +26,7 @@ function getUser(id) {
 }
 
 function getUserDetails(id) {
-    let sql = `SELECT id, first_name, last_name, image_url, about, country, dob FROM user WHERE id = ${id}`;
+    let sql = `SELECT id, first_name, last_name, image_url, about, country, dob FROM user WHERE id = '${id}'`;
     return promisifyQuery(sql);
 }
 
@@ -41,10 +41,10 @@ function getUserByEmail(email) {
 }
 
 module.exports = {
-    insertUser: insertUser,
-    updateUser: updateUser,
-    getUser: getUser,
+    insertUser,
+    updateUser,
+    getUser,
     getUserByEmail,
-    getUserDetails: getUserDetails,
-    getAllUsersDetail: getAllUsersDetail
+    getUserDetails,
+    getAllUsersDetail
 }

@@ -1,6 +1,5 @@
 const mysql = require('mysql2');
 
-// connect to a database peoplebook running on your localmachine
 var pool = mysql.createPool({
     connectionLimit: process.env.mysql_connection_pool_Limit || 10, // default:10
     host: process.env.mysql_host || 'localhost',

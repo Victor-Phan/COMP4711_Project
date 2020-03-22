@@ -19,9 +19,9 @@ exports.search = async (req, res, next) => {
     let data;
     
     if (type) {
-      data = await post.getPostByType(type);
+      data = await post.getPostsByType(type);
     } else if (subject) {
-      data = await post.getPostBySubject(subject);
+      data = await post.getPostsBySubject(subject);
     } else {
       throw new Error("Invalid search");
     }
@@ -30,7 +30,7 @@ exports.search = async (req, res, next) => {
 
     const processedPosts = result.map(async post => {
       const numOfRepliesData = await postcomment.getNumberComments(post.id);
-      const numberOfReplies = numOfRepliesData[0];
+      const numberOfReplies = numOfRepliesData[0].count;
 
       const replies = await postcomment.getPostComments(post.id);
 
