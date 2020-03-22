@@ -8,8 +8,7 @@ const methodOverride = require("method-override");
 const {
   authRoutes,
   postCommentRoutes,
-  postsRoutes,
-  searchRoutes
+  postsRoutes
 } = require("./routes");
 
 const { authHandlers, errorHandlers } = require("./utils");
@@ -63,7 +62,6 @@ app.get("/", (req, res) => res.render("home", {}));
 
 app.use(postCommentRoutes);
 app.use(postsRoutes);
-app.use(searchRoutes);
 
 app.use(errorHandlers.errorLogger);
 app.use(errorHandlers.clientErrorHandler);
