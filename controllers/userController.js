@@ -10,15 +10,12 @@ exports.getProfile = async (req, res, next) => {
     }
 
     const profileLikes = await profilelike.countLikes(user_id);
-    if(profileLikes.length == 0) {
-      throw new Error(`No such user with id: ${user_id}`);
-    }
 
     userData[0].profileLikes = profileLikes[0].count;
 
     const posts = await post.getAllPostsByUser(user_id);
     if(posts.length == 0) {
-      throw new Error(`No such user with id: ${user_id}`);
+      throw new Error(`Posts not found by user: ${user_id}`);
     }
 
     const processedPosts = posts.map(async post => {
