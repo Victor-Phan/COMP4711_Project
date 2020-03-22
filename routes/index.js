@@ -3,6 +3,5 @@ module.exports = {
   messageRoutes: require("./messageRoutes"),
   postCommentRoutes: require("./postCommentRoutes"),
   postsRoutes: require("./postsRoutes"),
-  searchRoutes: require("./searchRoutes"),
   userRoutes: require("./userRoutes")
 };
