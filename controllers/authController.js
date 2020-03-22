@@ -36,9 +36,9 @@ exports.signup = async (req, res, next) => {
     const newUser = req.body;
     newUser.password = await encryptPassword(newUser.password);
 
-    await user.insertUser(newUser);
-    req.session.user = { email: newUser.email };
-    return res.send(req.session.user);
+    const data = await user.insertUser(newUser);
+    req.session.user = { email: newUser.email, id: data.insertId };
+    return res.redirect("/");
   } catch (e) {
     next({ ...e, message: "Error signing user" });
   }
