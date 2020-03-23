@@ -65,6 +65,7 @@ app.get("/", (req, res) => res.render("home", {}));
 app.use(postCommentRoutes);
 app.use(postsRoutes);
 app.use(userRoutes);
+app.use(messageRoutes);
 
 app.use(errorHandlers.errorLogger);
 app.use(errorHandlers.clientErrorHandler);
