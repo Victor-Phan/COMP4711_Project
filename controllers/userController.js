@@ -58,7 +58,7 @@ exports.getUserMessages = async (req, res, next) => {
     Promise.all(processedConversations)
       .then(completed => {
         const filteredConversation = completed.filter(conversation => conversation.length > 0);
-        res.render("conversations", {
+        return res.render("conversations", {
           conversations: filteredConversation,
           messagingCSS: true
         })
