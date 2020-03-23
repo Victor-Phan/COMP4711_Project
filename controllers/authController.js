@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const { user } = require("../models");
+const { userModel } = require("../models");
 
 const saltRounds = process.env.SALT_ROUNDS || 10;
 
@@ -36,7 +36,7 @@ exports.signup = async (req, res, next) => {
     const newUser = req.body;
     newUser.password = await encryptPassword(newUser.password);
 
-    const data = await user.insertUser(newUser);
+    const data = await userModel.insertUser(newUser);
     req.session.user = { email: newUser.email, id: data.insertId };
     return res.redirect("/");
   } catch (e) {
@@ -47,7 +47,7 @@ exports.signup = async (req, res, next) => {
 exports.signin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const data = await user.getUserByEmail(email);
+    const data = await userModel.getUserByEmail(email);
 
     if (data.length == 0) {
       throw new Error("No such user");

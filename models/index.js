@@ -1,7 +1,7 @@
 module.exports = {
-    user: require('./user.js'),
-    message: require('./message.js'),
-    post: require('./post.js'),
-    postcomment: require('./postcomment.js'),
-    profilelike: require('./profilelike.js'),
+    userModel: require('./user.js'),
+    messageModel: require('./message.js'),
+    postModel: require('./post.js'),
+    postcommentModel: require('./postcomment.js'),
+    profilelikeModel: require('./profilelike.js'),
 }
