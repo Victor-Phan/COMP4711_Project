@@ -46,7 +46,7 @@ exports.getProfile = async (req, res, next) => {
 exports.getUserMessages = async (req, res, next) => {
   //Not sure how to ensure only the user has access to their messages..
   try {
-    const { user_id } = req.params;
+    const { id: user_id } = req.session.user;
     const user_ids = await userModel.getAllUserIdsWithExistingMessages(user_id);
 
     const processedConversations = user_ids.map(async user => {
