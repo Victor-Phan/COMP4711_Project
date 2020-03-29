@@ -28,25 +28,25 @@ exports.search = async (req, res, next) => {
 
     const result = data;
 
-    const processedPosts = result.map(async post => {
-      const numOfRepliesData = await postcommentModel.getNumberComments(post.id);
-      const numberOfReplies = numOfRepliesData[0].count;
+    // const processedPosts = result.map(async post => {
+    //   const numOfRepliesData = await postcommentModel.getNumberComments(post.id);
+    //   const numberOfReplies = numOfRepliesData[0].count;
 
-      const replies = await postcommentModel.getPostComments(post.id);
+    //   const replies = await postcommentModel.getPostComments(post.id);
 
-      return Object.assign({}, post, { numberOfReplies, replies });
-    });
+    //   return Object.assign({}, post, { numberOfReplies, replies });
+    // });
 
-    Promise.all(processedPosts)
-      .then(completed =>
-        res.render("searchResults", {
-          posts: completed,
-          searchResultsCSS: true
-        })
-      )
-      .catch(err => {
-        throw err;
-      });
+    // Promise.all(processedPosts)
+    //   .then(completed =>
+    //     res.render("searchResults", {
+    //       posts: completed,
+    //       searchResultsCSS: true
+    //     })
+    //   )
+    //   .catch(err => {
+    //     throw err;
+    //   });
   } catch (err) {
     next(err);
   }
