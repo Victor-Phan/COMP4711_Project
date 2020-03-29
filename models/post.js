@@ -32,7 +32,7 @@ function getPostsBySubject(filter) {
   return promisifyQuery(sql);
 }
 
-function getPostWithAllProperties(id) {
+function getPostWithAllProperties(post_id) {
   let sql = `SELECT post.id, type_id, message, user.first_name, user.last_name, user.image_url, COUNT(postcomment.id) AS replies
   FROM post 
   LEFT JOIN (
