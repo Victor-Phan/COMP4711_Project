@@ -22,8 +22,8 @@ function getAllPostsByUser(user_id) {
   return promisifyQuery(sql);
 }
 
-function getPostsByType(type) {
-  let sql = `SELECT * FROM post WHERE type = '${type}'`;
+function getPostsByType(type_id) {
+  let sql = `SELECT * FROM post WHERE type_id = '${type_id}'`;
   return promisifyQuery(sql);
 }
 
