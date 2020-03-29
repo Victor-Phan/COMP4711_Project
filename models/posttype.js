@@ -4,3 +4,7 @@ function getPostTypes() {
   const sql = `SELECT type FROM posttype`;
   return promisifyQuery(sql)
 }
+
+module.exports = {
+  getPostTypes
+}
