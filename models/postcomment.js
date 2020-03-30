@@ -6,12 +6,13 @@ function insertPostComment(e) {
                VALUES ('${post_id}', '${user_id}', '${comment}')`;
     return promisifyQuery(sql);
 }
+
 function getPostComments(post_id) {
     let sql = `SELECT postcomment.id, post_id, user_id, comment, timestamp, image_url
-    FROM c4711_finalproject.postcomment 
+    FROM postcomment 
     LEFT JOIN (
     SELECT id, image_url
-    FROM c4711_finalproject.user
+    FROM user
     ) user
     ON postcomment.user_id = user.id
     WHERE post_id = ${post_id} ORDER BY timestamp ASC`;
