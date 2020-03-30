@@ -17,7 +17,7 @@ exports.search = async (req, res, next) => {
   try {
     let { type, subject } = req.query;
     let data;
-    
+
     if (type) {
       data = await postModel.getPostsByType(type);
     } else if (subject) {
@@ -26,27 +26,10 @@ exports.search = async (req, res, next) => {
       throw new Error("Invalid search");
     }
 
-    const result = data;
-
-    const processedPosts = result.map(async post => {
-      const numOfRepliesData = await postcommentModel.getNumberComments(post.id);
-      const numberOfReplies = numOfRepliesData[0].count;
-
-      const replies = await postcommentModel.getPostComments(post.id);
-
-      return Object.assign({}, post, { numberOfReplies, replies });
+    return res.render("searchResults", {
+      posts: data,
+      searchResultsCSS: true
     });
-
-    Promise.all(processedPosts)
-      .then(completed =>
-        res.render("searchResults", {
-          posts: completed,
-          searchResultsCSS: true
-        })
-      )
-      .catch(err => {
-        throw err;
-      });
   } catch (err) {
     next(err);
   }
@@ -55,7 +38,7 @@ exports.search = async (req, res, next) => {
 exports.getOne = async (req, res, next) => {
   try {
     const { post_id } = req.params;
-    const data = await postModel.getOnePost(post_id);
+    const data = await postModel.getPostWithAllProperties(post_id);
 
     if (data.length == 0) {
       throw new Error(`No such post with id: ${post_id}`);
