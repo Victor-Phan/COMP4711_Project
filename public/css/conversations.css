@@ -1,0 +1,13 @@
+.div-sidebar{
+    width: 40%;
+}
+
+.button-send{
+    display:inline-block;
+    background-color: #38a3eb;
+    color: white;
+    padding: 7px 20px;
+    margin: 8px 8px;
+    border: none;
+    opacity: 0.9;
+}
