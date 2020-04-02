@@ -1,6 +1,6 @@
 const { promisifyQuery } = require("./helperFunctions.js");
 
-const baseSQL = `SELECT post.id, type_id, message, user.first_name, user.last_name, user.image_url, COUNT(postcomment.id) AS replies
+const baseSQL = `SELECT post.id, subject, type_id, message, user.first_name, user.last_name, user.image_url, COUNT(postcomment.id) AS replies
 FROM post 
 LEFT JOIN (
 SELECT id, first_name, last_name, image_url 
@@ -31,7 +31,7 @@ function getAllPosts() {
 }
 
 function getAllPostsByUser(user_id) {
-  let sql = `SELECT * FROM post WHERE user_id = '${user_id}'`;
+  let sql = `${baseSQL} WHERE user_id = '${user_id}'`;
   return promisifyQuery(sql);
 }
 
@@ -56,5 +56,6 @@ module.exports = {
   getAllPosts,
   getAllPostsByUser,
   getPostsByType,
-  getPostsBySubject
+  getPostsBySubject,
+  getPostWithAllProperties
 };
