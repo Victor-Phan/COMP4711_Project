@@ -1,5 +1,6 @@
-{{> nav_bar }}
-<div class="search-results--container">
+<div class="mainPage">
+  {{> nav_bar}}
+  {{> userDashboard}}
   {{#each posts}}
   {{>post_content this}}
   {{/each}}

@@ -60,7 +60,7 @@ app.use("/*", (err, req, res, next) => {
   }
 });
 
-app.get("/", (req, res) => res.render("home", {}));
+app.get("/", (req, res) => res.render("home", { navbarCSS: true }));
 
 app.use(postCommentRoutes);
 app.use(postsRoutes);
