@@ -35,10 +35,11 @@ exports.getProfile = async (req, res, next) => {
       return Object.assign({}, post, { numberOfReplies, replies });
     });
 
+    // This will need to change
     Promise.all(processedPosts)
       .then(completed =>
         res.render("profile", {
-          user: userData,
+          user: userData[0],
           posts: completed,
           profileCSS: true,
           navbarCSS: true
