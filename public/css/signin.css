@@ -6,7 +6,7 @@
 }
 
 #booksImg {
-    width: 70%;
+    width: 90%;
     height: 50%;
     float: left;
 }
@@ -14,14 +14,14 @@
 .leftside{
     float:left;
     height: 100vh;
-    width:  40vw;
+    width:  30vw;
     margin-left: 2%;
 }
 
 .rightside{
     float:right;
     height: 100vh;
-    width:  55vw;
+    width:  60vw;
 }
 
 .loginDiv{

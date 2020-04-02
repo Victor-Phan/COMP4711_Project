@@ -1,0 +1,60 @@
+
+.button-go{
+    display:inline-block;
+    background-color: #38a3eb;
+    color: white;
+    padding: 7px 20px;
+    margin: 8px 8px;
+    border: none;
+    opacity: 0.9;
+}
+
+.topics{
+
+    background-color: white;
+    color: #38a3eb;
+    padding: 7px 20px;
+    margin: 1px 0;
+    border-color: #38a3eb;
+    cursor: pointer;
+    width: 40%;
+    opacity: 0.9;
+
+}
+
+.button-post{
+    background-color: white;
+    color: #38a3eb;
+    padding: 7px 20px;
+    margin: 1px 0;
+    border-color: #38a3eb;
+    cursor: pointer;
+    width: 30%;
+    opacity: 0.9;
+}
+
+.header-search{
+    margin: 1%;
+    display: inline-block;
+}
+
+.div-selector{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.input-subject{
+    margin-right: 95%;
+    margin-bottom: 1%;
+}
+
+.div-questionAsk{
+    color: grey;
+    display: inline-block;
+    margin-left: 10%;
+    width: 50%;
+}
+
+.textarea-details{
+    width: 60%;
+}

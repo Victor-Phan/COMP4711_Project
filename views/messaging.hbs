@@ -3,11 +3,16 @@
 <div class="message">
     <div id="userPic">
          <img <!--Insert user pic here-->>
+<div class="div-message">
+    <div class="div-userPic">
+        <!--Temp placeholder image-->
+         <img class="img-userPic"src="https://randomuser.me/api/portraits/med/women/2.jpg" >
     </div>
-    <div>
-        <form method="POST" action="/message"></form>
-        <input placeholder="subject" name="subject"  type="text">
-        <textarea placeholder="message details..." rows="3" type="text" name="messageDetails"></textarea>
-        <button type="submit" class="messageBtn">Message</button>
+    <div class="div-form-message">
+        <form method="POST" action="/message">
+            <input class="input-subject" placeholder="subject" name="subject"  type="text">
+            <textarea class="textarea-messageDetails" placeholder="message details..." rows="7" type="text" name="messageDetails"></textarea>
+            <button type="submit" class="button button--message-submit">Message</button>
+        </form>
     </div>
 </div>
