@@ -1,8 +1,14 @@
-const { userModel, postModel, postcommentModel, profilelikeModel, messageModel } = require("../models");
+const {
+  userModel,
+  postModel,
+  postcommentModel,
+  profilelikeModel,
+  messageModel
+} = require("../models");
 
 exports.getProfile = async (req, res, next) => {
   try {
-    const { user_id } = req.params;
+    const { user_id } = req.body;
 
     const userData = await userModel.getUserDetails(user_id);
     if (userData.length == 0) {
@@ -19,7 +25,9 @@ exports.getProfile = async (req, res, next) => {
     }
 
     const processedPosts = posts.map(async post => {
-      const numOfRepliesData = await postcommentModel.getNumberComments(post.id);
+      const numOfRepliesData = await postcommentModel.getNumberComments(
+        post.id
+      );
       const numberOfReplies = numOfRepliesData[0].count;
 
       const replies = await postcommentModel.getPostComments(post.id);
@@ -57,15 +65,32 @@ exports.getUserMessages = async (req, res, next) => {
 
     Promise.all(processedConversations)
       .then(completed => {
-        const filteredConversation = completed.filter(conversation => conversation.length > 0);
+        const filteredConversation = completed.filter(
+          conversation => conversation.length > 0
+        );
         return res.render("conversations", {
           conversations: filteredConversation,
           messagingCSS: true
-        })
+        });
       })
       .catch(err => {
         throw err;
       });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getEditPage = async (req, res, next) => {
+  try {
+    const { user_id } = req.body;
+
+    const userData = await userModel.getUserDetails(user_id);
+    if (userData.length == 0) {
+      throw new Error(`No such user with id: ${user_id}`);
+    }
+
+    return res.render("editProfile", { user: userData[0], navbarCSS: true });
   } catch (err) {
     next(err);
   }

@@ -9,8 +9,9 @@ const {
   authRoutes,
   postCommentRoutes,
   postsRoutes,
+  profileRoutes,
   messageRoutes,
-  userRoutes,
+  userRoutes
 } = require("./routes");
 
 const { authHandlers, errorHandlers } = require("./utils");
@@ -64,6 +65,7 @@ app.get("/", (req, res) => res.render("home", { navbarCSS: true }));
 
 app.use(postCommentRoutes);
 app.use(postsRoutes);
+app.use(profileRoutes);
 app.use(userRoutes);
 app.use(messageRoutes);
 
