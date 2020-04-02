@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS `c4711_finalproject`.`user` (
   `last_name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL UNIQUE,
   `password` CHAR(64) NOT NULL,
-  `image_url` VARCHAR(45) NOT NULL,
+  `image_url` VARCHAR(100) NOT NULL,
   `about` VARCHAR(100) NOT NULL,
   `country` VARCHAR(45) NOT NULL,
   `dob` DATE NOT NULL,

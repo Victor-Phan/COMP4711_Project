@@ -40,7 +40,8 @@ exports.getProfile = async (req, res, next) => {
         res.render("profile", {
           user: userData,
           posts: completed,
-          profileCSS: true
+          profileCSS: true,
+          navbarCSS: true
         })
       )
       .catch(err => {
@@ -91,6 +92,18 @@ exports.getEditPage = async (req, res, next) => {
     }
 
     return res.render("editProfile", { user: userData[0], navbarCSS: true });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.updateProfile = async (req, res, next) => {
+  try {
+    const { id } = req.session.user;
+
+    await userModel.updateUser({ id, ...req.body });
+
+    return res.redirect("/profile");
   } catch (err) {
     next(err);
   }

@@ -10,13 +10,13 @@ function insertUser(e) {
 function updateUser(e) {
     //Cannot update password or email,
     let { id, first_name, last_name, image_url, about, country, dob } = e;
-    let sql = `UPDATE user SET first_name = ${first_name}, 
-                                last_name = ${last_name}, 
-                                image_url = ${image_url}, 
-                                about = ${about}, 
-                                country = ${country}, 
-                                dob = ${dob} 
-                                WHERE (id = ${id})`;
+    let sql = `UPDATE user SET first_name = '${first_name}', 
+                                last_name = '${last_name}', 
+                                image_url = '${image_url}', 
+                                about = '${about}', 
+                                country = '${country}', 
+                                dob = '${dob}' 
+                                WHERE (id = '${id}')`;
     return promisifyQuery(sql);
 }
 
@@ -26,7 +26,7 @@ function getUser(id) {
 }
 
 function getUserDetails(id) {
-    let sql = `SELECT id, first_name, last_name, image_url, about, country, dob FROM user WHERE id = '${id}'`;
+    let sql = `SELECT id, first_name, last_name, image_url, about, country, DATE_FORMAT(dob, "%Y-%m-%d") as dob FROM user WHERE id = '${id}'`;
     return promisifyQuery(sql);
 }
 

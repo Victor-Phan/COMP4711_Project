@@ -13,10 +13,10 @@ const getId = (req, res, next) => {
 
 router.get("/profile/edit", getId, userController.getEditPage);
 
+router.post("/profile/edit", userController.updateProfile);
+
 router.get("/profile/:user_id", getId, userController.getProfile);
 
 router.get("/profile", getId, userController.getProfile);
-
-// router.post("/profile/edit", userController.search);
 
 module.exports = router;
