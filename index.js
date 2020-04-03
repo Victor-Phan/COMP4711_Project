@@ -9,8 +9,9 @@ const {
   authRoutes,
   postCommentRoutes,
   postsRoutes,
+  profileRoutes,
   messageRoutes,
-  userRoutes,
+  userRoutes
 } = require("./routes");
 
 const { authHandlers, errorHandlers } = require("./utils");
