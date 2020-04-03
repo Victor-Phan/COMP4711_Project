@@ -32,7 +32,7 @@ exports.sendEmailMessage = async (req, res, next) => {
         const { id: sender_id } = req.session.user
         const {recipient_id, subject, message} = req.body;
         const e = {sender_id, recipient_id, subject, message};
-        const result = await messageModel.insertMessage(e);
+        await messageModel.insertMessage(e);
         const senderData = await userModel.getUserDetails(sender_id);
         if(senderData.length == 0) {
             throw new Error(`User not found: ${user_id}`);
@@ -46,11 +46,9 @@ exports.sendEmailMessage = async (req, res, next) => {
             subject: `From: ${senderData[0].email}: ` + e.subject,
             text: e.message
         };
-        try {
-            const response = await emailHandler.sendEmail(mailOptions);
-        }catch(err) {
-            next(err);
-        }
+        
+        await emailHandler.sendEmail(mailOptions);
+
         return res.send(`Successfully sent email to user: ${recipient_id}`);
     }catch(err) {
         next(err);

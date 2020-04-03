@@ -1,5 +1,7 @@
 const { promisifyQuery } = require('./helperFunctions.js');
 
+const baseSQL = `SELECT id, first_name, last_name, email, image_url, about, country, DATE_FORMAT(dob, "%Y-%m-%d") as dob FROM user`;
+
 function insertUser(e) {
     let { first_name, last_name, email, password, image_url, about, country, dob } = e;
     let sql = `INSERT INTO user (first_name, last_name, email, password, image_url, about, country, dob) 
@@ -26,7 +28,7 @@ function getUser(id) {
 }
 
 function getUserDetails(id) {
-    let sql = `SELECT id, first_name, last_name, email, image_url, about, country, DATE_FORMAT(dob, "%Y-%m-%d") as dob FROM user WHERE id = '${id}'`;
+    let sql = `${baseSQL} WHERE id = '${id}'`;
     return promisifyQuery(sql);
 }
 
@@ -43,7 +45,7 @@ function getUserProfileDetails(id) {
 }
 
 function getAllUsersDetail() {
-    let sql = `SELECT id, first_name, last_name, email, image_url, about, country, dob FROM user`;
+    let sql = baseSQL;
     return promisifyQuery(sql);
 }
 
