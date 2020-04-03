@@ -19,7 +19,6 @@ router.get("/profile/:user_id", getId, userController.getProfile);
 
 router.get("/profile", getId, userController.getProfile);
 
-
 router.get("/messages/:user_id", userController.getUserMessages);
 
 module.exports = router;
