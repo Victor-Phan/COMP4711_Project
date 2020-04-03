@@ -3,5 +3,6 @@ module.exports = {
   authController: require("./authController"),
   messageController: require("./messageController"),
   postCommentController: require("./postCommentController"),
-  postsController: require("./postsController")
+  postsController: require("./postsController"),
+  profileLikeController: require("./profileLikeController")
 };

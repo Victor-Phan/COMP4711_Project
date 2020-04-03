@@ -7,10 +7,11 @@ const methodOverride = require("method-override");
 
 const {
   authRoutes,
+  messageRoutes,
   postCommentRoutes,
   postsRoutes,
-  messageRoutes,
-  userRoutes,
+  profileLikeRoutes,
+  userRoutes
 } = require("./routes");
 
 const { authHandlers, errorHandlers } = require("./utils");
@@ -62,10 +63,11 @@ app.use("/*", (err, req, res, next) => {
 
 app.get("/", (req, res) => res.render("home", { navbarCSS: true }));
 
+app.use(messageRoutes);
 app.use(postCommentRoutes);
 app.use(postsRoutes);
 app.use(userRoutes);
-app.use(messageRoutes);
+app.use(profileLikeRoutes);
 
 app.use(errorHandlers.errorLogger);
 app.use(errorHandlers.clientErrorHandler);
