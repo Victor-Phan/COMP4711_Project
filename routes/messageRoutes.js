@@ -8,4 +8,5 @@ router.get("/sendmessage/:user_id", messageController.getSendMessagePage);
 
 router.post("/sendmessage", messageController.sendMessage);
 
+router.post("/sendemail", messageController.sendEmailMessage);
 module.exports = router;

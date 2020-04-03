@@ -26,12 +26,12 @@ function getUser(id) {
 }
 
 function getUserDetails(id) {
-    let sql = `SELECT id, first_name, last_name, image_url, about, country, dob FROM user WHERE id = '${id}'`;
+    let sql = `SELECT id, first_name, last_name, email, image_url, about, country, dob FROM user WHERE id = '${id}'`;
     return promisifyQuery(sql);
 }
 
 function getAllUsersDetail() {
-    let sql = `SELECT id, first_name, last_name, image_url, about, country, dob FROM user`;
+    let sql = `SELECT id, first_name, last_name, email, image_url, about, country, dob FROM user`;
     return promisifyQuery(sql);
 }
 
