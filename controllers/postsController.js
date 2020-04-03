@@ -19,9 +19,9 @@ exports.search = async (req, res, next) => {
     let { type, subject } = req.query;
     let data;
 
-    if (!!type) {
+    if (type) {
       data = await postModel.getPostsByType(type);
-    } else if (!!subject) {
+    } else if (subject) {
       data = await postModel.getPostsBySubject(subject);
     } else {
       throw new Error("Invalid search");
