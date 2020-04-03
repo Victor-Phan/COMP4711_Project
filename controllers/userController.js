@@ -10,7 +10,7 @@ exports.getProfile = async (req, res, next) => {
   try {
     const { user_id } = req.body;
 
-    const userData = await userModel.getUserProfileDetails(user_id);
+    const userData = await userModel.getUserDetails(user_id);
     if (userData.length == 0) {
       throw new Error(`No such user with id: ${user_id}`);
     }

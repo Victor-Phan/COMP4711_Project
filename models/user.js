@@ -47,11 +47,6 @@ function getUserDetails(id) {
   return promisifyQuery(sql);
 }
 
-function getUserProfileDetails(id) {
-  let sql = `${baseSQL} WHERE id = '${id}'`;
-  return promisifyQuery(sql);
-}
-
 function getAllUsersDetail() {
   let sql = baseSQL;
   return promisifyQuery(sql);
