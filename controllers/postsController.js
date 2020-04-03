@@ -1,13 +1,14 @@
-const { postModel, postcommentModel } = require("../models");
+const { postModel } = require("../models");
 
 exports.add = async (req, res, next) => {
   try {
     const newPost = req.body;
+
     newPost.user_id = req.session.user.id;
 
-    await postModel.insertPost(newPost);
+    const { insertId } = await postModel.insertPost(newPost);
 
-    return res.send(newPost);
+    return res.redirect(`/posts/${insertId}`);
   } catch (err) {
     next(err);
   }
@@ -26,10 +27,16 @@ exports.search = async (req, res, next) => {
       throw new Error("Invalid search");
     }
 
-    return res.render("searchResults", {
-      posts: data,
-      navbarCSS: true
-    });
+    return res.render(
+      "searchResults",
+      Object.assign(
+        {
+          posts: data,
+          navbarCSS: true,
+        },
+        !!subject && { term: subject }
+      )
+    );
   } catch (err) {
     next(err);
   }
@@ -37,14 +44,14 @@ exports.search = async (req, res, next) => {
 
 exports.getAll = async (req, res, next) => {
   try {
-    const { id } = req.session.user
-    const data = await postModel.getAllPostsByUser(id)
+    const { id } = req.session.user;
+    const data = await postModel.getAllPostsByUser(id);
 
-    return res.render("postList", { posts: data, navbarCSS: true })
+    return res.render("postList", { posts: data, navbarCSS: true });
   } catch (err) {
-    next(err)
+    next(err);
   }
-}
+};
 
 exports.getOne = async (req, res, next) => {
   try {
