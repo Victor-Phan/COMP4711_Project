@@ -20,6 +20,13 @@ exports.getProfile = async (req, res, next) => {
       throw new Error(`Posts not found by user: ${user_id}`);
     }
 
+    const data = await profilelikeModel.hasUserLiked(
+      req.session.user.id,
+      user_id
+    );
+
+    const hasLiked = !!data[0].count
+
     const processedPosts = posts.map(async post => {
       const numOfRepliesData = await postcommentModel.getNumberComments(
         post.id
@@ -37,6 +44,7 @@ exports.getProfile = async (req, res, next) => {
         res.render("profile", {
           user: userData[0],
           posts: completed,
+          hasLiked,
           profileCSS: true,
           navbarCSS: true
         })
