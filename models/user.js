@@ -48,8 +48,7 @@ function getUserDetails(id) {
 }
 
 function getUserProfileDetails(id) {
-  let sql = `${baseSQL} ON user.id = profilelike.user_profile_liked
-                WHERE id = '${id}'`;
+  let sql = `${baseSQL} WHERE id = '${id}'`;
   return promisifyQuery(sql);
 }
 
