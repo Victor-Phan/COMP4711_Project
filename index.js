@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 
 const {
   authRoutes,
+  homeRoutes,
   messageRoutes,
   postCommentRoutes,
   postsRoutes,
@@ -61,7 +62,7 @@ app.use("/*", (err, req, res, next) => {
   }
 });
 
-app.get("/", (req, res) => res.render("home", { navbarCSS: true }));
+app.use(homeRoutes);
 
 app.use(messageRoutes);
 app.use(postCommentRoutes);

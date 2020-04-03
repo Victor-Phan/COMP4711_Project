@@ -1,13 +1,14 @@
-const { postModel, postcommentModel } = require("../models");
+const { postModel } = require("../models");
 
 exports.add = async (req, res, next) => {
   try {
     const newPost = req.body;
+    
     newPost.user_id = req.session.user.id;
 
-    await postModel.insertPost(newPost);
-
-    return res.send(newPost);
+    const { insertId } = await postModel.insertPost(newPost);
+    
+    return res.redirect(`/posts/${insertId}`);
   } catch (err) {
     next(err);
   }

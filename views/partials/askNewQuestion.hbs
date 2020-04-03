@@ -1,28 +1,28 @@
-<div class ="div-questionAsk">
+<div class="div-questionAsk">
     <h2>what's your question today?</h2>
-        <div class="postQuestion">
-            <form class="createQuestion" method="POST" action=" ">
-                <input class="input-subject" name="subject" placeholder="subject" />
-                <textarea class="textarea-details" placeholder="explain in detail ..." rows="5"></textarea>
-                <div class="div-selector">
-                    <select class="topics">
-                        <option value="nodejs">nodejs</option>
-                        <option value="sql">SQL</option>
-                        <option value="cpp">C++</option>
-                        <option value="datacomm">Data Comm</option>
-                    </select>
-                    <button class="button-post">post to timeline</button>
-                </div>
-            </form>
-            <div>
-                <h4 class="header-search">Search by topic</h4>
-                <select class="topics" id="topicsSearch">
-                    <option value="nodejs">nodejs</option>
-                    <option value="sql">SQL</option>
-                    <option value="cpp">C++</option>
-                    <option value="datacomm">Data Comm</option>
+    <div class="postQuestion">
+        <form class="createQuestion" method="POST" action="/posts">
+            <input type="text" class="input-subject" name="subject" placeholder="subject" />
+            <textarea class="textarea-details" placeholder="explain in detail ..." rows="5" name="message"></textarea>
+            <div class="div-selector">
+                <select class="topics" name="type">
+                    {{#each postTypes}}
+                    <option value="{{this.id}}">{{this.type}}</option>
+                    {{/each}}
                 </select>
-                <button class="button-go">go-></button>
+                <input type="submit" class="button-post" value="post to timeline" />
             </div>
+        </form>
+        <div>
+            <h4 class="header-search">Search by topic</h4>
+            <form class="form--search-topic" action="/search" method="GET">
+                <select class="topics" id="topicsSearch" name="type">
+                    {{#each postTypes}}
+                    <option value="{{this.id}}">{{this.type}}</option>
+                    {{/each}}
+                </select>
+                <input type="submit" class="button-go" value="go->" />
+            </form>
         </div>
     </div>
+</div>

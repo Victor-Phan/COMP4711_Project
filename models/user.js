@@ -74,7 +74,6 @@ module.exports = {
   getUser,
   getUserByEmail,
   getUserDetails,
-  getUserProfileDetails,
   getAllUsersDetail,
   getAllUserIdsWithExistingMessages
 };
