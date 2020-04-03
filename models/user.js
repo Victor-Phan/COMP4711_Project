@@ -30,6 +30,18 @@ function getUserDetails(id) {
     return promisifyQuery(sql);
 }
 
+function getUserProfileDetails(id) {
+    let sql = `SELECT id, first_name, last_name, image_url, about, country, DATE_FORMAT(dob, "%Y-%m-%d") as dob, profilelike.count as profileLikes
+                FROM user 
+                LEFT JOIN (
+                    SELECT COUNT(*) AS count, user_profile_liked
+                    FROM profilelike
+                ) profilelike
+                ON user.id = profilelike.user_profile_liked
+                WHERE id = '${id}'`;
+    return promisifyQuery(sql);
+}
+
 function getAllUsersDetail() {
     let sql = `SELECT id, first_name, last_name, image_url, about, country, dob FROM user`;
     return promisifyQuery(sql);
@@ -58,6 +70,7 @@ module.exports = {
     getUser,
     getUserByEmail,
     getUserDetails,
+    getUserProfileDetails,
     getAllUsersDetail,
     getAllUserIdsWithExistingMessages
 }

@@ -10,14 +10,10 @@ exports.getProfile = async (req, res, next) => {
   try {
     const { user_id } = req.body;
 
-    const userData = await userModel.getUserDetails(user_id);
+    const userData = await userModel.getUserProfileDetails(user_id);
     if (userData.length == 0) {
       throw new Error(`No such user with id: ${user_id}`);
     }
-
-    const profileLikes = await profilelikeModel.countLikes(user_id);
-
-    userData[0].profileLikes = profileLikes[0].count;
 
     const posts = await postModel.getAllPostsByUser(user_id);
     if (posts.length == 0) {

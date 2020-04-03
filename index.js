@@ -65,7 +65,6 @@ app.get("/", (req, res) => res.render("home", { navbarCSS: true }));
 
 app.use(postCommentRoutes);
 app.use(postsRoutes);
-app.use(profileRoutes);
 app.use(userRoutes);
 app.use(messageRoutes);
 
