@@ -1,6 +1,6 @@
 const { promisifyQuery } = require("./helperFunctions.js");
 
-const baseSQL = `SELECT post.id, subject, type_id, message, user.first_name, user.last_name, user.image_url, COUNT(postcomment.id) AS replies, post.timestamp
+const baseSQL = `SELECT post.id, subject, type_id, message, user.first_name, user.last_name, user.image_url, replies, post.timestamp
 FROM post 
 LEFT JOIN (
 SELECT id, first_name, last_name, image_url 
@@ -8,7 +8,7 @@ FROM user
 ) user
 ON post.user_id = user.id 
 LEFT JOIN (
-SELECT id, post_id
+SELECT post_id, COUNT(*) AS replies
 FROM postcomment
 ) postcomment
 ON post.id = postcomment.post_id`;
@@ -16,7 +16,7 @@ ON post.id = postcomment.post_id`;
 function insertPost(e) {
   let { user_id, type, subject, message } = e;
   let sql = `INSERT INTO post (user_id, type_id, subject, message) 
-               VALUES ('${user_id}', '${type}', '${subject}', '${message}')`;
+               VALUES ("${user_id}", "${type}", "${subject}", "${message}")`;
   return promisifyQuery(sql);
 }
 
@@ -31,7 +31,7 @@ function getAllPosts() {
 }
 
 function getAllPostsDESC() {
-  let sql = `${baseSQL} ORDER BY timestamp DESC`;
+  let sql = `${baseSQL} ORDER BY post.timestamp DESC`;
   return promisifyQuery(sql);
 }
 
@@ -41,12 +41,12 @@ function getAllPostsByUser(user_id) {
 }
 
 function getPostsByType(type_id) {
-  let sql = `${baseSQL} WHERE type_id = '${type_id}'`;
+  let sql = `${baseSQL} WHERE post.type_id = '${type_id}'`;
   return promisifyQuery(sql);
 }
 
 function getPostsByTypeDESC(type_id) {
-  let sql = `${baseSQL} WHERE type_id = '${type_id}' ORDER BY timestamp DESC`;
+  let sql = `${baseSQL} WHERE type_id = '${type_id}' ORDER BY post.timestamp DESC`;
   return promisifyQuery(sql);
 }
 

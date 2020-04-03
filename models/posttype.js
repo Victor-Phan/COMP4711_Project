@@ -1,7 +1,7 @@
 const {promisifyQuery} = require('./helperFunctions.js');
 
 function getPostTypes() {
-  const sql = `SELECT type FROM posttype`;
+  const sql = `SELECT * FROM posttype`;
   return promisifyQuery(sql)
 }
 
