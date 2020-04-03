@@ -40,7 +40,7 @@ exports.register = async (req, res, next) => {
 
 exports.signup = async (req, res, next) => {
   req.session.user = req.body;
-  return res.render("signupPage", {});
+  return res.render("signupPage", { signupCSS: true });
 };
 
 exports.signin = async (req, res, next) => {
