@@ -1,6 +1,6 @@
 const { promisifyQuery } = require("./helperFunctions.js");
 
-const baseSQL = `SELECT post.id, subject, type_id, message, user.first_name, user.last_name, user.image_url, replies, post.timestamp
+const baseSQL = `SELECT post.id, subject, type_id, message, user.first_name, user.last_name, user.image_url, IFNULL(replies, 0) AS replies, post.timestamp
 FROM post 
 LEFT JOIN (
 SELECT id, first_name, last_name, image_url 
