@@ -10,6 +10,7 @@ ON post.user_id = user.id
 LEFT JOIN (
 SELECT post_id, COUNT(*) AS replies
 FROM postcomment
+GROUP BY post_id
 ) postcomment
 ON post.id = postcomment.post_id`;
 
