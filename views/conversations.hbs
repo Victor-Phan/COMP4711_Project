@@ -1,35 +1,40 @@
-<!--Conversation page with list of conversations
-Not yet completed-->
-<div class="conversation">
-    {{> nav_bar}}
-    <div class="sidebar">
-        <table>
-            <!--not sure about this. fix?-->
-            {{#each conversations}}
-            <tr>
-                <td>
-                    <div class="convo">
-                        <div class="userImg">
-                            <!--include user img here-->
-                        </div>
-                        <p class="userName">
-                            {{this.firstname}} {{this.lastname}}
-                        </p>
-                    </div>
-                    <div class="info">
-                        {{this.date}} {{this.topic}}
-                    </div>
-                </td>
-            </tr>
-            {{/each}}
-        </table>
-    </div>
-    <div class="messages">
-        <!--not fully completed yet-->
-        <div class="entryBox">
-            <textarea class="entryText" rows="4" placeholder="Write a message..."></textarea>
+{{> nav_bar}}
+<div class="div--conversation-container">
+    <div class="div--conversation-sidebar">
+        {{#each recipients}}
+        <div class="div--consersation-sidebar__item" id="div--convesation-sidebar__item-{{this.recipient_id}}">
+            <div class="convo">
+                <div class="userImg">
+                    <img src="{{this.recipient_image_url}}"
+                        alt="{{this.recipient_first_name}} {{this.recipient_last_name}}" />
+                </div>
+                <p class="userName">
+                    {{this.recipient_first_name}} {{this.recipient_last_name}}
+                </p>
+            </div>
+            <div class="info">
+                {{this.timestamp}} {{this.subject}}
+            </div>
         </div>
-        <!--need a method for send-->
-        <button type='button' class='sendBtn' onclick="send()">Send</button>
-     </div>   
+        {{/each}}
+    </div>
+    <div class="div--conversation-messages__container">
+        <div class="div--conversation-messages__content">
+            {{#each conversations}}
+                {{#each conversation}}
+                    {{this.timestamp}}
+                {{/each}}
+            {{/each}}
+        </div>
+        <div class="div--conversation-messages__entry-container">
+            <form action="POST">
+                <div class="form--message-input">
+                    <textarea class="form--message-input__text" rows="4" placeholder="Write a message..."></textarea>
+
+                    <!--need a method for send-->
+                    <input type="submit" class="form--message-input__submit" value="Send" />
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

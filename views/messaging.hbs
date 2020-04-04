@@ -1,4 +1,3 @@
-<!--When a user clicks on the Message button, this page loads for messaging.-->
 {{> nav_bar }}
 <div class="div-message">
     <div class="div-userPic">
@@ -8,7 +7,7 @@
         <form method="POST" action="/sendemail/{{user.id}}">
             <input class="input-subject" placeholder="subject" name="subject" type="text">
             <textarea class="textarea-messageDetails" placeholder="message details..." rows="7" type="text"
-                name="messageDetails"></textarea>
+                name="message"></textarea>
             <input type="submit" class="button button--message-submit" value="Message" />
         </form>
     </div>

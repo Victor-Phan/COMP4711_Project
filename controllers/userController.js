@@ -3,7 +3,7 @@ const {
   postModel,
   postcommentModel,
   profilelikeModel,
-  messageModel
+  messageModel,
 } = require("../models");
 
 exports.getProfile = async (req, res, next) => {
@@ -16,15 +16,15 @@ exports.getProfile = async (req, res, next) => {
     }
 
     const posts = await postModel.getAllPostsByUser(user_id);
-    
+
     const data = await profilelikeModel.hasUserLiked(
       req.session.user.id,
       user_id
     );
 
-    const hasLiked = !!data[0].count
+    const hasLiked = !!data[0].count;
 
-    const processedPosts = posts.map(async post => {
+    const processedPosts = posts.map(async (post) => {
       const numOfRepliesData = await postcommentModel.getNumberComments(
         post.id
       );
@@ -37,16 +37,16 @@ exports.getProfile = async (req, res, next) => {
 
     // This will need to change
     Promise.all(processedPosts)
-      .then(completed =>
+      .then((completed) =>
         res.render("profile", {
           user: userData[0],
           posts: completed,
           hasLiked,
           profileCSS: true,
-          navbarCSS: true
+          navbarCSS: true,
         })
       )
-      .catch(err => {
+      .catch((err) => {
         throw err;
       });
   } catch (err) {
@@ -60,23 +60,39 @@ exports.getUserMessages = async (req, res, next) => {
     const { id: user_id } = req.session.user;
     const user_ids = await userModel.getAllUserIdsWithExistingMessages(user_id);
 
-    const processedConversations = user_ids.map(async user => {
+    const processedConversations = user_ids.map(async (user) => {
       const e = { requestingUserID: user_id, requestedUserID: user.id };
       const conversation = await messageModel.getMessageForConversation(e);
       return conversation;
     });
 
     Promise.all(processedConversations)
-      .then(completed => {
-        const filteredConversation = completed.filter(
-          conversation => conversation.length > 0
+      .then((completed) => {
+        const filteredConversations = completed.filter(
+          (conversation) => conversation.length > 0
         );
+
+        const recipients = filteredConversations.map(conversation => {
+          const val = conversation[0];
+          return ({
+                recipient_id: val.recipient_id,
+                recipient_first_name: val.recipient_first_name,
+                recipient_last_name: val.recipient_last_name,
+                recipient_image_url: val.recipient_image_url,
+                subject: val.subject,
+                message: val.message,
+                timestamp: val.timestamp
+              })
+        });
+
         return res.render("conversations", {
-          conversations: filteredConversation,
-          messagingCSS: true
+          recipients,
+          conversations: filteredConversations,
+          conversationsCSS: true,
+          navbarCSS: true,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         throw err;
       });
   } catch (err) {

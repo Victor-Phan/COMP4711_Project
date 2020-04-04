@@ -6,6 +6,9 @@ const messagePageCSS = { messagingCSS: true, navbarCSS: true };
 exports.getSendMessagePage = async (req, res, next) => {
   try {
     const { user_id } = req.params;
+    if (user_id === req.session.user.id) {
+      return res.redirect("/messages");
+    }
     const userData = await userModel.getUserDetails(user_id);
     if (userData.length == 0) {
       throw new Error(`User not found: ${user_id}`);
@@ -35,16 +38,19 @@ exports.sendEmailMessage = async (req, res, next) => {
     const { subject, message } = req.body;
     const { user_id: recipient_id } = req.params;
     const e = { sender_id, recipient_id, subject, message };
-    await messageModel.insertMessage(e);
+
     const senderData = await userModel.getUserDetails(sender_id);
     if (senderData.length == 0) {
       throw new Error(`User not found: ${user_id}`);
     }
+    
     const receiverData = await userModel.getUserDetails(recipient_id);
     if (receiverData.length == 0) {
       throw new Error(`User not found: ${user_id}`);
     }
-
+    
+    await messageModel.insertMessage(e);
+    
     const mailOptions = {
       to: receiverData[0].email,
       subject: `From: ${senderData[0].email}: ` + e.subject,

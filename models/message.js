@@ -35,7 +35,7 @@ function getMessageForConversation(e) {
             WHERE 
                 (message.recipient_id = '${requestingUserID}' AND message.sender_id = '${requestedUserID}') OR
                 (message.recipient_id = '${requestedUserID}' AND message.sender_id = '${requestingUserID}')
-            ORDER BY message.timestamp ASC`;
+            ORDER BY message.timestamp DESC`;
     return promisifyQuery(sql);
 }
 

@@ -1,13 +1,50 @@
-.div-sidebar{
-    width: 40%;
+.div--conversation-container {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
 }
 
-.button-send{
+.div--conversation-sidebar {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.div--conversation-messages__container {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+}
+
+.div--consersation-sidebar__item {
+    padding: 1em;
+}
+
+.div--conversation-messages__content {
+    flex: 3;
+}
+
+.div--conversation-messages__entry-container {
+    flex: 1;
+}
+
+.form--message-input {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.form--message-input__text {
+    margin: 1em;
+    border-radius: 0.25em;
+}
+
+.form--message-input__submit {
     display:inline-block;
     background-color: #38a3eb;
     color: white;
-    padding: 7px 20px;
-    margin: 8px 8px;
+    padding: 0.5em 1em;
+    margin: 0.5em 0.5em;
     border: none;
     opacity: 0.9;
 }
