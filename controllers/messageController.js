@@ -26,9 +26,11 @@ exports.getUserMessages = async (req, res, next) => {
 
     const messages = await messageModel.getFirstMessageForUser(user_id);
 
-    return res.redirect(
-      `/messages/${messages.length === 0 ? 0 : messages[0].id}`
-    );
+    if (messages.length === 0) {
+      return res.render("conversations", conversationsPageCSS);
+    }
+
+    return res.redirect(`/messages/${messages[0].id}`);
   } catch (err) {
     next(err);
   }
