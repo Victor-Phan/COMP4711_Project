@@ -16,10 +16,7 @@ exports.getProfile = async (req, res, next) => {
     }
 
     const posts = await postModel.getAllPostsByUser(user_id);
-    if (posts.length == 0) {
-      throw new Error(`Posts not found by user: ${user_id}`);
-    }
-
+    
     const data = await profilelikeModel.hasUserLiked(
       req.session.user.id,
       user_id
