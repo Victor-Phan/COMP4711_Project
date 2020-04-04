@@ -24,6 +24,13 @@
         <link href="/css/messaging.css" rel="stylesheet">
         <link href="/css/conversations.css" rel="stylesheet">
         -->
+    <link href="/css/root.css" rel="stylesheet">
+    {{#if conversationsCSS}}
+    <link href="/css/conversations.css" rel="stylesheet">
+    {{/if}}
+    {{#if messagingCSS}}
+    <link href="/css/messaging.css" rel="stylesheet">
+    {{/if}}
     {{#if signupCSS}}
     <link href="/css/signup.css" rel="stylesheet">
     {{/if}}
