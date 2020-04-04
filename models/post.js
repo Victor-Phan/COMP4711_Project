@@ -1,6 +1,6 @@
 const { promisifyQuery } = require("./helperFunctions.js");
 
-const baseSQL = `SELECT post.id, subject, type_id, message, user.first_name, user.last_name, user.image_url, replies
+const baseSQL = `SELECT post.id, subject, type_id, message, user.id AS user_id, user.first_name, user.last_name, user.image_url, IFNULL(replies, 0) AS replies, post.timestamp
 FROM post 
 LEFT JOIN (
 SELECT id, first_name, last_name, image_url 
@@ -10,6 +10,7 @@ ON post.user_id = user.id
 LEFT JOIN (
 SELECT post_id, COUNT(*) AS replies
 FROM postcomment
+GROUP BY post_id
 ) postcomment
 ON post.id = postcomment.post_id`;
 
@@ -30,6 +31,11 @@ function getAllPosts() {
   return promisifyQuery(sql);
 }
 
+function getAllPostsDESC() {
+  let sql = `${baseSQL} ORDER BY post.timestamp DESC`;
+  return promisifyQuery(sql);
+}
+
 function getAllPostsByUser(user_id) {
   let sql = `${baseSQL} WHERE user_id = '${user_id}'`;
   return promisifyQuery(sql);
@@ -37,6 +43,11 @@ function getAllPostsByUser(user_id) {
 
 function getPostsByType(type_id) {
   let sql = `${baseSQL} WHERE post.type_id = '${type_id}'`;
+  return promisifyQuery(sql);
+}
+
+function getPostsByTypeDESC(type_id) {
+  let sql = `${baseSQL} WHERE type_id = '${type_id}' ORDER BY post.timestamp DESC`;
   return promisifyQuery(sql);
 }
 
@@ -54,8 +65,10 @@ module.exports = {
   insertPost,
   getOnePost,
   getAllPosts,
+  getAllPostsDESC,
   getAllPostsByUser,
   getPostsByType,
+  getPostsByTypeDESC,
   getPostsBySubject,
   getPostWithAllProperties
 };

@@ -5,7 +5,11 @@
     <div class="discussionListBox">
         <!--add more logic here-->
         <div class="indivDiscussion">
-            {{discussionBox}}
+              {{#each posts}}
+                {{>discussionBox this}}
+                {{/each}}
         </div>
+        <a onclick="prevPostPage()" class="paginateButton">Prev</a>
+        <a onclick="nextPostPage()" class="paginateButton">Next</a>
     </div>
 </div

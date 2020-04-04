@@ -2,11 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
-const { posttypeModel } = require("../models")
+const { homeController } = require("../controllers");
 
-router.get("/", async (req, res, next) => {
-  const postTypes = await posttypeModel.getPostTypes();
-  return res.render("home", { navbarCSS: true, postTypes })
-});
+router.get("/", homeController.getHomePage);
 
 module.exports = router;
