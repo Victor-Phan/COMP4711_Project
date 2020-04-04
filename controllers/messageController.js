@@ -21,7 +21,6 @@ exports.getSendMessagePage = async (req, res, next) => {
 };
 
 exports.getUserMessages = async (req, res, next) => {
-  //Not sure how to ensure only the user has access to their messages..
   try {
     const { id: user_id } = req.session.user;
 
