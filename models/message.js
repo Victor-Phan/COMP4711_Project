@@ -1,21 +1,42 @@
-const {promisifyQuery} = require('./helperFunctions.js');
+const { promisifyQuery } = require("./helperFunctions.js");
 
 function insertMessage(e) {
-    let {sender_id, recipient_id, subject, message} = e;
-    let sql = `INSERT INTO message (sender_id, recipient_id, subject, message) 
+  let { sender_id, recipient_id, subject, message } = e;
+  let sql = `INSERT INTO message (sender_id, recipient_id, subject, message) 
                VALUES ('${sender_id}', '${recipient_id}', '${subject}', '${message}')`;
-    return promisifyQuery(sql);
+  return promisifyQuery(sql);
+}
+
+function getFirstMessageForUser(id) {
+  const sql = `SELECT id
+    FROM message 
+    WHERE recipient_id = ${id} 
+    ORDER BY timestamp ASC
+    LIMIT 1`;
+  return promisifyQuery(sql);
 }
 
 function getAllMessagesForUser(id) {
-    let sql = `SELECT * FROM message WHERE sender_id = '${id}' OR recipient_id = '${id}' ORDER BY timestamp ASC`;
+  let sql = `SELECT message.*, first_name, last_name, image_url 
+    FROM message 
+    LEFT JOIN (
+        SELECT first_name, last_name, id, image_url
+        FROM USER
+    ) user
+    ON user.id = message.sender_id
+    WHERE recipient_id = '${id}' 
+    ORDER BY timestamp ASC`;
+  return promisifyQuery(sql);
+}
+
+function getMessage(message_id) {
+    let sql = `SELECT * FROM message WHERE id = "${message_id}"`
     return promisifyQuery(sql);
 }
 
 function getMessageForConversation(e) {
-    let {requestingUserID, requestedUserID} = e;
-    let sql = 
-            `SELECT 
+  let { requestingUserID, requestedUserID } = e;
+  let sql = `SELECT 
                 recipient.id AS 'recipient_id',
                 recipient.first_name AS 'recipient_first_name',
                 recipient.last_name AS 'recipient_last_name',
@@ -36,11 +57,13 @@ function getMessageForConversation(e) {
                 (message.recipient_id = '${requestingUserID}' AND message.sender_id = '${requestedUserID}') OR
                 (message.recipient_id = '${requestedUserID}' AND message.sender_id = '${requestingUserID}')
             ORDER BY message.timestamp DESC`;
-    return promisifyQuery(sql);
+  return promisifyQuery(sql);
 }
 
 module.exports = {
-    insertMessage,
-    getAllMessagesForUser,
-    getMessageForConversation
-}
+  insertMessage,
+  getAllMessagesForUser,
+  getFirstMessageForUser,
+  getMessage,
+  getMessageForConversation,
+};

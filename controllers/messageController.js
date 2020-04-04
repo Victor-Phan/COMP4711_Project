@@ -1,7 +1,8 @@
-const { messageModel, userModel } = require("../models");
+const { messageModel, messageReplyModel, userModel } = require("../models");
 const { emailHandler } = require("../utils");
 
 const messagePageCSS = { messagingCSS: true, navbarCSS: true };
+const conversationsPageCSS = { conversationsCSS: true, navbarCSS: true };
 
 exports.getSendMessagePage = async (req, res, next) => {
   try {
@@ -14,6 +15,50 @@ exports.getSendMessagePage = async (req, res, next) => {
       throw new Error(`User not found: ${user_id}`);
     }
     return res.render("messaging", { user: userData[0], ...messagePageCSS });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getUserMessages = async (req, res, next) => {
+  //Not sure how to ensure only the user has access to their messages..
+  try {
+    const { id: user_id } = req.session.user;
+
+    const messages = await messageModel.getFirstMessageForUser(user_id);
+
+    return res.redirect(
+      `/messages/${messages.length === 0 ? 0 : messages[0].id}`
+    );
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.getConversationPage = async (req, res, next) => {
+  try {
+    const { message_id } = req.params;
+    const { id: user_id } = req.session.user;
+
+    if (message_id == 0) {
+      return res.render("conversations", conversationsPageCSS);
+    }
+
+    const messages = await messageModel.getAllMessagesForUser(user_id);
+
+    const selectedMessage = await messageModel.getMessage(message_id);
+
+    const rawMessageReplies = await messageReplyModel.getAllMessageReplies(
+      message_id
+    );
+
+    const messageReplies = [selectedMessage[0], ...rawMessageReplies];
+
+    return res.render("conversations", {
+      messages,
+      messageReplies,
+      ...conversationsPageCSS,
+    });
   } catch (err) {
     next(err);
   }
@@ -43,14 +88,14 @@ exports.sendEmailMessage = async (req, res, next) => {
     if (senderData.length == 0) {
       throw new Error(`User not found: ${user_id}`);
     }
-    
+
     const receiverData = await userModel.getUserDetails(recipient_id);
     if (receiverData.length == 0) {
       throw new Error(`User not found: ${user_id}`);
     }
-    
+
     await messageModel.insertMessage(e);
-    
+
     const mailOptions = {
       to: receiverData[0].email,
       subject: `From: ${senderData[0].email}: ` + e.subject,

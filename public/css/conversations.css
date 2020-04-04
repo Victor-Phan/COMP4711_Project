@@ -10,7 +10,7 @@
     flex-direction: column;
 }
 
-.div--conversation-messages__container {
+.div--conversation-messageReplies__container {
     display: flex;
     flex: 2;
     flex-direction: column;
@@ -20,26 +20,30 @@
     padding: 1em;
 }
 
-.div--conversation-messages__content {
+.div--conversation-messageReplies__content {
     flex: 3;
 }
 
-.div--conversation-messages__entry-container {
+.div--conversation-messageReplies__entry-container {
     flex: 1;
 }
 
-.form--message-input {
+.div--conversation-messageReply__container {
+    padding: 1em;
+}
+
+.form--messageReply-input {
     display: flex;
     flex: 1;
     flex-direction: column;
 }
 
-.form--message-input__text {
+.form--messageReply-input__text {
     margin: 1em;
     border-radius: 0.25em;
 }
 
-.form--message-input__submit {
+.form--messageReply-input__submit {
     display:inline-block;
     background-color: #38a3eb;
     color: white;
