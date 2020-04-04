@@ -9,6 +9,7 @@ const {
   authRoutes,
   homeRoutes,
   messageRoutes,
+  messageReplyRoutes,
   postCommentRoutes,
   postsRoutes,
   profileLikeRoutes,
@@ -65,6 +66,7 @@ app.use("/*", (err, req, res, next) => {
 app.use(homeRoutes);
 
 app.use(messageRoutes);
+app.use(messageReplyRoutes);
 app.use(postCommentRoutes);
 app.use(postsRoutes);
 app.use(userRoutes);

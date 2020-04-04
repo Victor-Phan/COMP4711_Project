@@ -46,17 +46,18 @@ exports.getConversationPage = async (req, res, next) => {
 
     const messages = await messageModel.getAllMessagesForUser(user_id);
 
-    const selectedMessage = await messageModel.getMessage(message_id);
+    const selectedMessageData = await messageModel.getMessage(message_id);
 
     const rawMessageReplies = await messageReplyModel.getAllMessageReplies(
       message_id
     );
 
-    const messageReplies = [selectedMessage[0], ...rawMessageReplies];
+    const messageReplies = [selectedMessageData[0], ...rawMessageReplies];
 
     return res.render("conversations", {
       messages,
       messageReplies,
+      selectedMessage: selectedMessageData[0],
       ...conversationsPageCSS,
     });
   } catch (err) {

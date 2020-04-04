@@ -23,16 +23,16 @@
         <div class="div--conversation-messageReplies__content">
             {{#each messageReplies}}
             <div class="div--conversation-messageReply__container">
-                {{this.id}}
+                {{this.timestamp}}
+                <img src="{{this.image_url}}" alt="{{this.first_name}} {{this.last_name}}" />
+                {{this.message}}{{this.reply}}
             </div>
             {{/each}}
         </div>
         <div class="div--conversation-messagesReplies__entry-container">
-            <form method="POST" action="/messageReply">
+            <form method="POST" action="/messageReply/{{this.selectedMessage.id}}">
                 <div class="form--messageReply-input">
-                    <textarea class="form--messageReply-input__text" rows="4" placeholder="Write a reply..."></textarea>
-
-                    <!--need a method for send-->
+                    <textarea class="form--messageReply-input__text" rows="4" placeholder="Write a reply..." name="reply"></textarea>
                     <input type="submit" class="form--messageReply-input__submit" value="Send" />
                 </div>
             </form>

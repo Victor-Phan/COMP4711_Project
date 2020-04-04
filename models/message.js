@@ -17,21 +17,28 @@ function getFirstMessageForUser(id) {
 }
 
 function getAllMessagesForUser(id) {
-  let sql = `SELECT message.*, first_name, last_name, image_url 
+  let sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as timestamp
     FROM message 
     LEFT JOIN (
         SELECT first_name, last_name, id, image_url
         FROM USER
     ) user
     ON user.id = message.sender_id
-    WHERE recipient_id = '${id}' 
+    WHERE recipient_id = "${id}" OR sender_id = "${id}"
     ORDER BY timestamp ASC`;
   return promisifyQuery(sql);
 }
 
 function getMessage(message_id) {
-    let sql = `SELECT * FROM message WHERE id = "${message_id}"`
-    return promisifyQuery(sql);
+  let sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as timestamp
+    FROM message 
+    LEFT JOIN (
+        SELECT first_name, last_name, id, image_url
+        FROM USER
+    ) user
+    ON user.id = message.sender_id
+    WHERE message.id = "${message_id}"`;
+  return promisifyQuery(sql);
 }
 
 function getMessageForConversation(e) {
