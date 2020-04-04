@@ -7,5 +7,12 @@ exports.getHomePage = async(req, res, next) => {
     //maybe get each post comment for each post here..
     //FE does not accomodate this yet.
 
-    return res.render("home", { navbarCSS: true, homeCSS: true, postTypes, posts });
+    return res.render("home", {
+        navbarCSS: true,
+        homeCSS: true,
+        passwordCheck: true,
+        homePageJS: true,
+        postTypes,
+        posts
+    });
 }
