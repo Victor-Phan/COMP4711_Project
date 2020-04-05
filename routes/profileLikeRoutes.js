@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
 
-const { profileLikeController } = require("../controllers");
+const { profileLikeController } = require('../controllers');
 
-router.post("/like", profileLikeController.toggleLike);
+router.post('/like', profileLikeController.toggleLike);
 
 module.exports = router;

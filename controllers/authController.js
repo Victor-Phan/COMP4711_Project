@@ -1,5 +1,5 @@
-const bcrypt = require("bcrypt");
-const { userModel } = require("../models");
+const bcrypt = require('bcrypt');
+const { userModel } = require('../models');
 
 const loginCSS = { signinCSS: true};
 const registerCSS = { signupCSS: true };
@@ -35,7 +35,7 @@ exports.register = async (req, res, next) => {
 
     const { insertId } = await userModel.insertUser(newUser);
     req.session.user = { email: newUser.email, id: insertId };
-    return res.redirect("/");
+    return res.redirect('/');
   } catch (e) {
     next(e);
   }
@@ -43,32 +43,35 @@ exports.register = async (req, res, next) => {
 
 exports.signup = async (req, res, next) => {
   req.session.user = req.body;
-  return res.render("signupPage", registerCSS);
+  return res.render('signupPage', registerCSS);
 };
 
 exports.signin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const data = await userModel.getUserByEmail(email);
+    const [validUser] = await userModel.getUserByEmail(email);
 
-    if (data.length == 0) {
-      throw new Error("No such user");
+    if (!validUser) {
+      throw new Error('No such user');
     }
 
-    const validUser = data[0];
     if (!(await isPasswordValid(password, validUser.password)))
-      throw new Error("Invalid password");
+      throw new Error('Invalid password');
 
     req.session.user = { email: validUser.email, id: validUser.id };
-    return res.redirect("/");
+    return res.redirect('/');
   } catch (e) {
     next(e);
   }
 };
 
+<<<<<<< HEAD
 exports.signinPage = (req, res) => res.render("landingPage", loginCSS);
+=======
+exports.signinPage = (req, res) => res.render('landingPage', {});
+>>>>>>> Stylized everything according to airbnb standards
 
 exports.signout = (req, res) => {
-  req.session.destroy(() => console.log("User signed out"));
-  return res.redirect("/signin");
+  req.session.destroy(() => console.log('User signed out'));
+  return res.redirect('/signin');
 };

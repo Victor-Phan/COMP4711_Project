@@ -1,23 +1,22 @@
-const { promisifyQuery } = require("./helperFunctions.js");
+const { promisifyQuery } = require('./helperFunctions.js');
 
-function insertMessage(e) {
-  let { sender_id, recipient_id, subject, message } = e;
-  let sql = `INSERT INTO message (sender_id, recipient_id, subject, message) 
+const insertMessage = ({ sender_id, recipient_id, subject, message }) => {
+  const sql = `INSERT INTO message (sender_id, recipient_id, subject, message) 
                VALUES ('${sender_id}', '${recipient_id}', '${subject}', '${message}')`;
   return promisifyQuery(sql);
-}
+};
 
-function getFirstMessageForUser(id) {
+const getFirstMessageForUser = (id) => {
   const sql = `SELECT id
     FROM message 
     WHERE recipient_id = ${id} 
     ORDER BY timestamp ASC
     LIMIT 1`;
   return promisifyQuery(sql);
-}
+};
 
-function getAllMessagesForUser(id) {
-  let sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as timestamp
+const getAllMessagesForUser = (id) => {
+  const sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as timestamp
     FROM message 
     LEFT JOIN (
         SELECT first_name, last_name, id, image_url
@@ -27,10 +26,10 @@ function getAllMessagesForUser(id) {
     WHERE recipient_id = "${id}" OR sender_id = "${id}"
     ORDER BY timestamp ASC`;
   return promisifyQuery(sql);
-}
+};
 
-function getMessage(message_id) {
-  let sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as timestamp
+const getMessage = (message_id) => {
+  const sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as timestamp
     FROM message 
     LEFT JOIN (
         SELECT first_name, last_name, id, image_url
@@ -39,11 +38,10 @@ function getMessage(message_id) {
     ON user.id = message.sender_id
     WHERE message.id = "${message_id}"`;
   return promisifyQuery(sql);
-}
+};
 
-function getMessageForConversation(e) {
-  let { requestingUserID, requestedUserID } = e;
-  let sql = `SELECT 
+const getMessageForConversation = ({ requestingUserID, requestedUserID }) => {
+  const sql = `SELECT 
                 recipient.id AS 'recipient_id',
                 recipient.first_name AS 'recipient_first_name',
                 recipient.last_name AS 'recipient_last_name',
