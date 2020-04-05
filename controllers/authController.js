@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { userModel } = require("../models");
 
-const saltRounds = process.env.SALT_ROUNDS || 10;
+const saltRounds = 10;
 
 const encryptPassword = async (pw) => {
   try {
@@ -34,7 +34,7 @@ exports.register = async (req, res, next) => {
     req.session.user = { email: newUser.email, id: insertId };
     return res.redirect("/");
   } catch (e) {
-    next({ ...e, message: "Error registering user" });
+    next(e);
   }
 };
 
