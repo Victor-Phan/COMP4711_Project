@@ -30,7 +30,10 @@ exports.register = async (req, res, next) => {
     const newUser = { ...req.session.user, ...req.body };
     newUser.password = await encryptPassword(newUser.password);
 
+    console.log(newUser)
+
     const { insertId } = await userModel.insertUser(newUser);
+    console.log(insertId)
     req.session.user = { email: newUser.email, id: insertId };
     return res.redirect("/");
   } catch (e) {
