@@ -1,8 +1,8 @@
 <div class="div-userDesc">
     <div class="div-userInfo">
-        <img class="img-userPic" src="">
-        <p class="p-username">Jane Doe</p>
-        <span class="span-desc">Singer</span>
+        <img class="img-userPic" src="{{userDetails.image_url}}">
+        <p class="p-username">{{userDetails.first_name}} {{userDetails.last_name}}</p>
+        <span class="span-desc">{{userDetails.about}}</span>
         <!--
         <img src="{{context.personUrl}}">
         <p>{{context.firstName}} {{context.lastName}}</p>
@@ -11,9 +11,9 @@
     </div>
     <div class="div-userStats">
         <ul>
-            <li><a href="/posts/">Posts</a><span>{{context.postsNum}}</span></li>
-            <li><a href="/messages/">Messages</a><span>{{context.msgsNum}}</span></li>
-            <li>Likes<span>{{context.likeNum}}</span></li>
+            <li><a href="/posts/">Posts</a><span> {{userDetails.postCount}}</span></li>
+            <li><a href="/messages/">Messages</a><span> {{userDetails.messageCount}}</span></li>
+            <li>Likes<span> {{userDetails.profileLikes}}</span></li>
             <li class="li-edit"><a href="/profile/edit/">Edit Profile</a></li>
         </ul>
     </div>
