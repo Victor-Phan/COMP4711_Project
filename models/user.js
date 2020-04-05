@@ -37,20 +37,20 @@ function insertUser(e) {
         dob
     } = e;
     let sql = `INSERT INTO user (first_name, last_name, email, password, image_url, about, country, dob) 
-               VALUES ('${first_name}', '${last_name}', '${email}', '${password}', '${image_url}', '${about}', '${country}', '${dob}')`;
+               VALUES ("${first_name}", "${last_name}", "${email}", "${password}", "${image_url}", "${about}", "${country}", "${dob}")`;
     return promisifyQuery(sql);
 }
 
 function updateUser(e) {
     //Cannot update password or email,
     let { id, first_name, last_name, image_url, about, country, dob } = e;
-    let sql = `UPDATE user SET first_name = '${first_name}', 
-                                last_name = '${last_name}', 
-                                image_url = '${image_url}', 
-                                about = '${about}', 
-                                country = '${country}', 
-                                dob = '${dob}' 
-                                WHERE (id = '${id}')`;
+    let sql = `UPDATE user SET first_name = "${first_name}", 
+                                last_name = "${last_name}", 
+                                image_url = "${image_url}", 
+                                about = "${about}", 
+                                country = "${country}", 
+                                dob = "${dob}" 
+                                WHERE (id = "${id}")`;
     return promisifyQuery(sql);
 }
 
