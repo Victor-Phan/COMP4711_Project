@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { userModel } = require("../models");
 
-const saltRounds = process.env.SALT_ROUNDS || 10;
+const saltRounds = 10;
 
 const encryptPassword = async (pw) => {
   try {
