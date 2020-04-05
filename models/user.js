@@ -74,23 +74,11 @@ function getUserByEmail(email) {
     return promisifyQuery(sql);
 }
 
-function getAllUserIdsWithExistingMessages(user_id) {
-    let sql = `SELECT DISTINCT user.id 
-            FROM user user
-            INNER JOIN message message ON
-                user.id =  message.recipient_id OR
-                user.id =  message.sender_id
-            WHERE 
-                message.recipient_id = '${user_id}' OR message.sender_id = '${user_id}'`;
-    return promisifyQuery(sql);
-}
-
 module.exports = {
     insertUser,
     updateUser,
     getUser,
     getUserByEmail,
     getUserDetails,
-    getAllUsersDetail,
-    getAllUserIdsWithExistingMessages
+    getAllUsersDetail
 };
