@@ -13,17 +13,11 @@
     {{#if homePageJS}}
     <script defer type="text/javascript" src="scripts/pagination.js"></script>
     {{/if}}
-    <!--Use if for css selection-->
-    <!--
-       
-        <link href="/css/userDashboard.css" rel="stylesheet">
-        <link href="/css/askQuestion.css" rel="stylesheet">
-        <link href="/css/signin.css" rel="stylesheet">
-       
-        <link href="/css/home.css" rel="stylesheet">
-        <link href="/css/messaging.css" rel="stylesheet">
-        <link href="/css/conversations.css" rel="stylesheet">
-        -->
+    {{#if homeCSS}}
+    <link href="/css/userDashboard.css" rel="stylesheet">
+    <link href="/css/askQuestion.css" rel="stylesheet">
+    <link href="/css/discussionList.css" rel="stylesheet">
+    {{/if}}
     <link href="/css/root.css" rel="stylesheet">
     {{#if conversationsCSS}}
     <link href="/css/conversations.css" rel="stylesheet">
@@ -46,6 +40,7 @@
     {{#if signupCSS}}
     <link href="/css/signup.css" rel="stylesheet">
     {{/if}}
+
 
 
 
