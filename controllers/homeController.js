@@ -29,12 +29,12 @@ exports.getHomePage = async (req, res, next) => {
       .then((posts) =>
         res.render('home', {
           userDetails,
+          postTypes,
+          posts,
           navbarCSS: true,
           homeCSS: true,
           passwordCheck: true,
           homePageJS: true,
-          postTypes,
-          posts,
         })
       )
       .catch((err) => {
