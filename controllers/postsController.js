@@ -88,9 +88,9 @@ exports.getAll = async (req, res, next) => {
 exports.getOne = async (req, res, next) => {
   try {
     const { post_id } = req.params;
-    const [post] = await postModel.getPostWithAllProperties(post_id);
+    const data = await postModel.getPostWithAllProperties(post_id);
 
-    if (!post) {
+    if (data.length === 0) {
       throw new Error(`No such post with id: ${post_id}`);
     }
 
