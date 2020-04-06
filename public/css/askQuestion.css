@@ -1,3 +1,9 @@
+.div-questionAsk{
+    color: grey;
+    display: inline-block;
+    margin-left: 11%;
+    width: 50%;
+}
 
 .button-go{
     display:inline-block;
@@ -39,8 +45,8 @@
 }
 
 .div-selector{
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 .input-subject{
@@ -48,12 +54,6 @@
     margin-bottom: 1%;
 }
 
-.div-questionAsk{
-    color: grey;
-    display: inline-block;
-    margin-left: 10%;
-    width: 50%;
-}
 
 .textarea-details{
     width: 60%;
