@@ -1,4 +1,4 @@
-const { postModel } = require('../models');
+const { postModel, postcommentModel } = require('../models');
 
 exports.add = async (req, res, next) => {
   try {
@@ -27,12 +27,28 @@ exports.search = async (req, res, next) => {
       throw new Error('Invalid search');
     }
 
-    return res.render('searchResults', {
-      posts: data,
-      navbarCSS: true,
-      postCSS: true,
-      ...(!!subject ? { term: subject } : {}),
+    //Get all comments within each post
+    const processedPosts = data.map(async (post) => {
+      const postcomment = await postcommentModel.getPostComments(post.id);
+
+      return {
+        ...post,
+        postcomment,
+      };
     });
+
+    Promise.all(processedPosts)
+      .then((posts) =>
+        res.render('postList', {
+          posts,
+          ...(!!subject ? { term: subject } : {}),
+          postCSS: true,
+          navbarCSS: true,
+        })
+      )
+      .catch((err) => {
+        throw err;
+      });
   } catch (err) {
     next(err);
   }
@@ -43,7 +59,27 @@ exports.getAll = async (req, res, next) => {
     const { id } = req.session.user;
     const data = await postModel.getAllPostsByUser(id);
 
-    return res.render('postList', { posts: data, postCSS: true, navbarCSS: true });
+    //Get all comments within each post
+    const processedPosts = data.map(async (post) => {
+      const postcomment = await postcommentModel.getPostComments(post.id);
+
+      return {
+        ...post,
+        postcomment,
+      };
+    });
+
+    Promise.all(processedPosts)
+      .then((posts) =>
+        res.render('postList', {
+          posts,
+          navbarCSS: true,
+          postCSS: true,
+        })
+      )
+      .catch((err) => {
+        throw err;
+      });
   } catch (err) {
     next(err);
   }
@@ -58,7 +94,28 @@ exports.getOne = async (req, res, next) => {
       throw new Error(`No such post with id: ${post_id}`);
     }
 
-    return res.render('post', { post, navbarCSS: true, postCSS: true });
+    //Get all comments within each post
+    const processedPosts = data.map(async (post) => {
+      const postcomment = await postcommentModel.getPostComments(post.id);
+
+      return {
+        ...post,
+        postcomment,
+      };
+    });
+
+    Promise.all(processedPosts)
+      .then((posts) =>
+        res.render('postList', {
+          posts,
+          navbarCSS: true,
+          postCSS: true,
+        })
+      )
+      .catch((err) => {
+        throw err;
+      });
+
   } catch (err) {
     next(err);
   }

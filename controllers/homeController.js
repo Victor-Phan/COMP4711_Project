@@ -17,11 +17,11 @@ exports.getHomePage = async (req, res, next) => {
 
     //Get all comments within each post
     const processedPosts = posts.map(async (post) => {
-      const postWithReplies = await postcommentModel.getPostComments(post.id);
+      const postcomment = await postcommentModel.getPostComments(post.id);
 
       return {
         ...post,
-        comments: postWithReplies,
+        postcomment,
       };
     });
 
