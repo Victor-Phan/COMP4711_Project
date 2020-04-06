@@ -10,13 +10,13 @@ const getFirstMessageForUser = (id) => {
   const sql = `SELECT id
     FROM message 
     WHERE recipient_id = ${id} OR sender_id = ${id}
-    ORDER BY timestamp ASC
+    ORDER BY message.timestamp DESC
     LIMIT 1`;
   return promisifyQuery(sql);
 };
 
 const getAllMessagesForUser = (id) => {
-  const sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as timestamp
+  const sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as date, DATE_FORMAT(message.timestamp, "%r") as timestamp
     FROM message 
     LEFT JOIN (
         SELECT first_name, last_name, id, image_url
@@ -24,12 +24,12 @@ const getAllMessagesForUser = (id) => {
     ) user
     ON user.id = message.sender_id
     WHERE recipient_id = "${id}" OR sender_id = "${id}"
-    ORDER BY timestamp ASC`;
+    ORDER BY message.timestamp DESC`;
   return promisifyQuery(sql);
 };
 
 const getMessage = (message_id) => {
-  const sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as timestamp
+  const sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as date, DATE_FORMAT(message.timestamp, "%r") as timestamp
     FROM message 
     LEFT JOIN (
         SELECT first_name, last_name, id, image_url
