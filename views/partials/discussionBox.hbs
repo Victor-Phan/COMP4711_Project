@@ -14,6 +14,6 @@
   <div class="div-date">
     {{this.timestamp}}
   </div>
-  <div class="div-replyNum">{{this.replies}} Replies</div>
+  <div class="div-replyNum" onclick="toggle_replies(this)">{{this.replies}} Replies</div>
   {{>post_replies this}}
 </div>
