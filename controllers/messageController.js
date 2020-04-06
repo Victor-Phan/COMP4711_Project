@@ -9,7 +9,7 @@ const conversationsPageCSS = { conversationsCSS: true, navbarCSS: true };
 
 const formatMessageDate = (message) => ({
   ...message,
-  timestamp: dateFormatter(message.timestamp),
+  date: dateFormatter(message.date),
 });
 
 exports.getSendMessagePage = async (req, res, next) => {

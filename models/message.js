@@ -16,7 +16,7 @@ const getFirstMessageForUser = (id) => {
 };
 
 const getAllMessagesForUser = (id) => {
-  const sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as timestamp
+  const sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as date, DATE_FORMAT(message.timestamp, "%r") as timestamp
     FROM message 
     LEFT JOIN (
         SELECT first_name, last_name, id, image_url
@@ -29,7 +29,7 @@ const getAllMessagesForUser = (id) => {
 };
 
 const getMessage = (message_id) => {
-  const sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as timestamp
+  const sql = `SELECT message.*, first_name, last_name, image_url, DATE_FORMAT(message.timestamp, "%Y-%m-%d") as date, DATE_FORMAT(message.timestamp, "%r") as timestamp
     FROM message 
     LEFT JOIN (
         SELECT first_name, last_name, id, image_url
