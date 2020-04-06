@@ -1,7 +1,7 @@
 const { promisifyQuery } = require('./helperFunctions.js');
 
 const getAllMessageReplies = (message_id) => {
-  const sql = `SELECT messageReply.*, first_name, last_name, image_url, DATE_FORMAT(messageReply.timestamp, "%Y-%m-%d") as timestamp
+  const sql = `SELECT messageReply.*, first_name, last_name, image_url, DATE_FORMAT(messageReply.timestamp, "%Y-%m-%d") as date, DATE_FORMAT(messageReply.timestamp, "%r") as timestamp
   FROM messageReply 
   LEFT JOIN (
     SELECT first_name, last_name, image_url, id
