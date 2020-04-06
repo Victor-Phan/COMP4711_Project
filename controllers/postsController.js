@@ -30,6 +30,7 @@ exports.search = async (req, res, next) => {
     return res.render('searchResults', {
       posts: data,
       navbarCSS: true,
+      postCSS: true,
       ...(!!subject ? { term: subject } : {}),
     });
   } catch (err) {
@@ -42,7 +43,7 @@ exports.getAll = async (req, res, next) => {
     const { id } = req.session.user;
     const data = await postModel.getAllPostsByUser(id);
 
-    return res.render('postList', { posts: data, navbarCSS: true });
+    return res.render('postList', { posts: data, postCSS: true, navbarCSS: true });
   } catch (err) {
     next(err);
   }
@@ -57,7 +58,7 @@ exports.getOne = async (req, res, next) => {
       throw new Error(`No such post with id: ${post_id}`);
     }
 
-    return res.render('post', { post, navbarCSS: true });
+    return res.render('post', { post, navbarCSS: true, postCSS: true });
   } catch (err) {
     next(err);
   }

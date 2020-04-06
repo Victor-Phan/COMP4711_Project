@@ -1,0 +1,50 @@
+.search-userImage{
+    border-top-left-radius: 50% 50%;
+    border-top-right-radius: 50% 50%;
+    border-bottom-right-radius: 50% 50%;
+    border-bottom-left-radius: 50% 50%;
+    max-width: 70%;
+    max-height: 70%;
+    position: relative;
+    top: -50px;
+}
+
+.search-user-reply-img{
+    border-top-left-radius: 50% 50%;
+    border-top-right-radius: 50% 50%;
+    border-bottom-right-radius: 50% 50%;
+    border-bottom-left-radius: 50% 50%;
+    max-width: 60%;
+    max-height: 60%;
+}
+
+.search-results--item-contents{
+    color: gray;
+}
+
+.search-results--item > div{
+    display: inline-block;
+    margin-left: 2%;
+}
+
+.search-results--item-contents-header{
+    display: inline-block;
+    font-size: larger;
+}
+
+.search-results--item-contents-message{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.search-post-submit{
+    display:inline-block;
+    background-color: #38a3eb;
+    color: white;
+    padding: 7px 20px;
+    margin: 8px 8px;
+    border: none;
+    opacity: 0.9;
+    margin-top: 1%;
+    
+}
