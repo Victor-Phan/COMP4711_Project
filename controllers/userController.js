@@ -2,44 +2,48 @@ const {
   userModel,
   postModel,
   postcommentModel,
-  profilelikeModel
-} = require("../models");
+  profilelikeModel,
+} = require('../models');
 
 exports.getProfile = async (req, res, next) => {
   try {
     const { user_id } = req.body;
 
-    const userData = await userModel.getUserDetails(user_id);
-    if (userData.length == 0) {
+    const [user] = await userModel.getUserDetails(user_id);
+    if (!user) {
       throw new Error(`No such user with id: ${user_id}`);
     }
 
     const posts = await postModel.getAllPostsByUser(user_id);
 
-    const data = await profilelikeModel.hasUserLiked(
+    const [likes] = await profilelikeModel.hasUserLiked(
       req.session.user.id,
       user_id
     );
 
-    const hasLiked = !!data[0].count;
+    const hasLiked = !!likes.count;
 
     const processedPosts = posts.map(async (post) => {
-      const numOfRepliesData = await postcommentModel.getNumberComments(
+      const [numOfRepliesData] = await postcommentModel.getNumberComments(
         post.id
       );
-      const numberOfReplies = numOfRepliesData[0].count;
+      const numberOfReplies = numOfRepliesData.count;
 
       const replies = await postcommentModel.getPostComments(post.id);
 
-      return Object.assign({}, post, { numberOfReplies, replies });
+      return {
+        numberOfReplies,
+        replies,
+        ...post,
+      };
     });
 
     // This will need to change
     Promise.all(processedPosts)
-      .then((completed) =>
-        res.render("profile", {
-          user: userData[0],
-          posts: completed,
+      .then((posts) =>
+        res.render('profile', {
+          posts,
+          user,
           hasLiked,
           profileCSS: true,
           navbarCSS: true,
@@ -57,12 +61,12 @@ exports.getEditPage = async (req, res, next) => {
   try {
     const { user_id } = req.body;
 
-    const userData = await userModel.getUserDetails(user_id);
-    if (userData.length == 0) {
+    const [user] = await userModel.getUserDetails(user_id);
+    if (!user) {
       throw new Error(`No such user with id: ${user_id}`);
     }
 
-    return res.render("editProfile", { user: userData[0], navbarCSS: true });
+    return res.render('editProfile', { user, navbarCSS: true });
   } catch (err) {
     next(err);
   }
@@ -74,7 +78,7 @@ exports.updateProfile = async (req, res, next) => {
 
     await userModel.updateUser({ id, ...req.body });
 
-    return res.redirect("/profile");
+    return res.redirect('/profile');
   } catch (err) {
     next(err);
   }

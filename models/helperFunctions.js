@@ -1,6 +1,6 @@
-const { db } = require("../db");
+const { db } = require('../db');
 
-function promisifyQuery(sql) {
+const promisifyQuery = (sql) => {
   return new Promise((resolve, reject) => {
     db.execute(sql, (err, data, fields) => {
       if (err) {
@@ -12,5 +12,5 @@ function promisifyQuery(sql) {
 }
 
 module.exports = {
-  promisifyQuery
+  promisifyQuery,
 };

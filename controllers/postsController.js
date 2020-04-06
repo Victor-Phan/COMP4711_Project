@@ -1,4 +1,4 @@
-const { postModel } = require("../models");
+const { postModel } = require('../models');
 
 exports.add = async (req, res, next) => {
   try {
@@ -24,19 +24,14 @@ exports.search = async (req, res, next) => {
     } else if (subject) {
       data = await postModel.getPostsBySubject(subject);
     } else {
-      throw new Error("Invalid search");
+      throw new Error('Invalid search');
     }
 
-    return res.render(
-      "searchResults",
-      Object.assign(
-        {
-          posts: data,
-          navbarCSS: true,
-        },
-        !!subject && { term: subject }
-      )
-    );
+    return res.render('searchResults', {
+      posts: data,
+      navbarCSS: true,
+      ...(!!subject ? { term: subject } : {}),
+    });
   } catch (err) {
     next(err);
   }
@@ -47,7 +42,7 @@ exports.getAll = async (req, res, next) => {
     const { id } = req.session.user;
     const data = await postModel.getAllPostsByUser(id);
 
-    return res.render("postList", { posts: data, navbarCSS: true });
+    return res.render('postList', { posts: data, navbarCSS: true });
   } catch (err) {
     next(err);
   }
@@ -56,13 +51,13 @@ exports.getAll = async (req, res, next) => {
 exports.getOne = async (req, res, next) => {
   try {
     const { post_id } = req.params;
-    const data = await postModel.getPostWithAllProperties(post_id);
+    const [post] = await postModel.getPostWithAllProperties(post_id);
 
-    if (data.length == 0) {
+    if (!post) {
       throw new Error(`No such post with id: ${post_id}`);
     }
 
-    return res.render("post", { post: data[0], navbarCSS: true });
+    return res.render('post', { post, navbarCSS: true });
   } catch (err) {
     next(err);
   }

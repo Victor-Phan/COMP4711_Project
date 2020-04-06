@@ -1,9 +1,12 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
 
-const { messageReplyController } = require("../controllers");
+const { messageReplyController } = require('../controllers');
 
-router.post("/messageReply/:message_id", messageReplyController.addMessageReply);
+router.post(
+  '/messageReply/:message_id',
+  messageReplyController.addMessageReply
+);
 
 module.exports = router;

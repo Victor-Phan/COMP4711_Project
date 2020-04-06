@@ -1,5 +1,5 @@
 module.exports = {
-  authHandlers: require("./auth"),
-  errorHandlers: require("./errorHandlers"),
-  emailHandler: require("./email")
+  authHandlers: require('./auth'),
+  errorHandlers: require('./errorHandlers'),
+  emailHandler: require('./email'),
 };
