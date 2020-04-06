@@ -33,7 +33,6 @@ exports.getHomePage = async (req, res, next) => {
           posts,
           navbarCSS: true,
           homeCSS: true,
-          passwordCheck: true,
           homePageJS: true,
         })
       )

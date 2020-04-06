@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const { userModel } = require('../models');
 
-const loginCSS = { signinCSS: true};
+const loginScripts = { signinCSS: true, passwordCheck: true, };
 const registerCSS = { signupCSS: true };
 
 const saltRounds = 10;
@@ -65,7 +65,7 @@ exports.signin = async (req, res, next) => {
   }
 };
 
-exports.signinPage = (req, res) => res.render('landingPage', loginCSS);
+exports.signinPage = (req, res) => res.render('landingPage', loginScripts);
 
 exports.signout = (req, res) => {
   req.session.destroy(() => console.log('User signed out'));
