@@ -1,13 +1,15 @@
 .div--conversation-container {
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
+    overflow-y: hidden;
+    height: 100%;
 }
-
 .div--conversation-sidebar {
     display: flex;
     flex: 1;
     flex-direction: column;
+    height: inherit;
+    overflow-y: scroll;
 }
 
 .div--conversation-messageReplies__container {
@@ -16,8 +18,23 @@
     flex-direction: column;
 }
 
-.div--consersation-sidebar__item {
+.div--conversation-sidebar__item {
     padding: 1em;
+    display: flex;
+    flex-direction: row;
+}
+
+#div--conversation-sidebar__item-selected {
+    background-color: #DDD;
+}
+
+.div--conversation-sidebar__item div {
+    flex: 1;
+}
+
+.a--conversation--sidebar__item-wrapper {
+    text-decoration: none;
+    color: inherit;
 }
 
 .div--conversation-messageReplies__content {
@@ -51,4 +68,77 @@
     margin: 0.5em 0.5em;
     border: none;
     opacity: 0.9;
+}
+
+.div--conversation-item__thumbnail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    border-radius: 50%;
+}
+
+.div--conversation-item__content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.div--conversation-item__content-date {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.div--conversation-messageReply__timestamp {
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+h4 {
+    width: 100%;
+    text-align: center;
+}
+
+h4.background {
+    position: relative;
+    z-index: 1;
+}
+
+h4.background:before {
+    border-top: 2px solid #dfdfdf;
+    content:"";
+    margin: 0 auto; /* this centers the line to the full width specified */
+    position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
+    top: 50%; left: 0; right: 0; bottom: 0;
+    width: 95%;
+    z-index: -1;
+}
+
+h4.background span { 
+    /* to hide the lines from behind the text, you have to set the background color the same as the container */ 
+    background: #fff; 
+    padding: 0 1em; 
+}
+
+.div--conversation-messageReply__content-wrapper {
+    display: flex;
+}
+
+.div--conversation-messageReply__thumbnail {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+
+.div--conversation-messageReply__content-container {
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+    justify-content: center;
+}
+
+.div--conversation-messageReply__content-header {
+    font-weight: bold;
 }

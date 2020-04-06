@@ -16,7 +16,11 @@ const {
   userRoutes,
 } = require('./routes');
 
-const { authHandlers, errorHandlers } = require('./utils');
+const {
+  authHandlers,
+  errorHandlers,
+  handlebarsHelpers: { ifHelper },
+} = require('./utils');
 
 const app = express();
 
@@ -44,6 +48,9 @@ app.engine(
     extname: 'hbs',
   })
 );
+
+const hbs = expressHbs.create({});
+hbs.handlebars.registerHelper('iff', ifHelper);
 
 app.set('view engine', 'hbs');
 app.set('views', 'views');

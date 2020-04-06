@@ -10,7 +10,7 @@ const getFirstMessageForUser = (id) => {
   const sql = `SELECT id
     FROM message 
     WHERE recipient_id = ${id} OR sender_id = ${id}
-    ORDER BY timestamp ASC
+    ORDER BY message.timestamp DESC
     LIMIT 1`;
   return promisifyQuery(sql);
 };
@@ -24,7 +24,7 @@ const getAllMessagesForUser = (id) => {
     ) user
     ON user.id = message.sender_id
     WHERE recipient_id = "${id}" OR sender_id = "${id}"
-    ORDER BY timestamp ASC`;
+    ORDER BY message.timestamp DESC`;
   return promisifyQuery(sql);
 };
 

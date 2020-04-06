@@ -1,8 +1,16 @@
 const { messageModel, messageReplyModel, userModel } = require('../models');
-const { emailHandler } = require('../utils');
+const {
+  emailHandler,
+  formatters: { dateFormatter },
+} = require('../utils');
 
 const messagePageCSS = { messagingCSS: true, navbarCSS: true };
 const conversationsPageCSS = { conversationsCSS: true, navbarCSS: true };
+
+const formatMessageDate = (message) => ({
+  ...message,
+  timestamp: dateFormatter(message.timestamp),
+});
 
 exports.getSendMessagePage = async (req, res, next) => {
   try {
@@ -41,7 +49,9 @@ exports.getConversationPage = async (req, res, next) => {
     const { message_id } = req.params;
     const { id: user_id } = req.session.user;
 
-    const messages = await messageModel.getAllMessagesForUser(user_id);
+    const unprocessedMessages = await messageModel.getAllMessagesForUser(user_id);
+
+    const messages = unprocessedMessages.map(formatMessageDate);
 
     const [selectedMessage] = await messageModel.getMessage(message_id);
 
@@ -49,7 +59,9 @@ exports.getConversationPage = async (req, res, next) => {
       message_id
     );
 
-    const messageReplies = [selectedMessage, ...rawMessageReplies];
+    const unprocessedMessageReplies = [selectedMessage, ...rawMessageReplies];
+
+    const messageReplies = unprocessedMessageReplies.map(formatMessageDate);
 
     return res.render('conversations', {
       messages,
