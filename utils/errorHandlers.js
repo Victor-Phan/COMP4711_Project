@@ -12,7 +12,7 @@ const clientErrorHandler = (err, req, res, next) => {
 };
 
 const errorHandler = (err, req, res, next) => {
-  res.status(500).send(err.message);
+  return res.redirect(`${req.protocol}://${req.headers.host}${req.originalUrl}/?errors=${err.message}`);
 };
 
 module.exports = {
