@@ -9,7 +9,7 @@ const insertMessage = ({ sender_id, recipient_id, subject, message }) => {
 const getFirstMessageForUser = (id) => {
   const sql = `SELECT id
     FROM message 
-    WHERE recipient_id = ${id} 
+    WHERE recipient_id = ${id} OR sender_id = ${id}
     ORDER BY timestamp ASC
     LIMIT 1`;
   return promisifyQuery(sql);
