@@ -2,7 +2,7 @@
 <!-- not complete with all the actions yet-->
 {{> nav_bar}}
 <div class="div-topSection">
-    <div class="div-leftTop">
+    <div class="div-leftTop-userInfo">
         <div class="div-userImg">
             <img class="img-userPic" src="{{user.image_url}}" alt="{{user.id}}" />
         </div>
@@ -18,7 +18,7 @@
             </p>
         </div>
     </div>
-    <div class="div-rightTop">
+    <div class="div-rightTop-likes-messages">
         <a href="/sendmessage/{{user.id}}" class="a-message">Message</a>
         <div class="likes">
             <p class="p-likes">
@@ -37,7 +37,7 @@
         </div>
     </div>
 </div>
-<div class="bottomSection">
+<div class="bottomSection-posts">
     <div class="div-allposts">
         <p class="p-allposts">All posts by {{user.first_name}}</p>
     </div>

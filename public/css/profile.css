@@ -9,7 +9,7 @@
 
 }
 
-.div-leftTop{
+.div-leftTop-userInfo{
     display: inline-block;
 }
 
@@ -22,7 +22,7 @@
     margin-left: 2%;;
 }
 
-.div-rightTop{
+.div-rightTop-likes-messages{
     display:inline-block;
     margin-left: 3%;
 }
