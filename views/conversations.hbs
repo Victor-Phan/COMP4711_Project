@@ -2,18 +2,22 @@
 <div class="div--conversation-container">
     <div class="div--conversation-sidebar">
         {{#each messages}}
-        <a href="/messages/{{this.id}}">
-            <div class="div--consersation-sidebar__item" id="div--convesation-sidebar__item-{{this.sender_id}}">
-                <div class="convo">
-                    <div class="userImg">
-                        <img src="{{this.image_url}}" alt="{{this.first_name}} {{this.last_name}}" />
-                    </div>
-                    <p class="userName">
-                        {{this.first_name}} {{this.last_name}}
-                    </p>
+        <a class="a--conversation--sidebar__item-wrapper" href="/messages/{{this.id}}">
+            <div class="div--conversation-sidebar__item"
+                {{#iff ../selectedMessage.id '==' id}}id="div--conversation-sidebar__item-selected" {{/iff}}>
+                <div class="div--conversation-item__thumbnail">
+                    <img src="{{this.image_url}}" alt="{{this.first_name}} {{this.last_name}}" />
                 </div>
-                <div class="info">
-                    {{this.timestamp}} {{this.subject}}
+                <div class="div--conversation-item__content-wrapper">
+                    <h3 class="div--conversation-item__content-name">
+                        {{this.first_name}} {{this.last_name}}
+                    </h3>
+                    <div class="div--conversation-item__content-subject">
+                        {{this.subject}}
+                    </div>
+                </div>
+                <div class="div--conversation-item__content-date">
+                    {{this.date}}
                 </div>
             </div>
         </a>
@@ -23,17 +27,35 @@
         <div class="div--conversation-messageReplies__content">
             {{#each messageReplies}}
             <div class="div--conversation-messageReply__container">
-                {{this.timestamp}}
-                <img src="{{this.image_url}}" alt="{{this.first_name}} {{this.last_name}}" />
-                {{this.message}}{{this.reply}}
+                <div class="div--conversation-messageReply__date">
+                    <h4 class="background"><span>{{this.date}}</span></h4>
+                </div>
+                <div class="div--conversation-messageReply__content-wrapper">
+                    <div class="div--conversation-messageReply__thumbnail">
+                        <img src="{{this.image_url}}" alt="{{this.first_name}} {{this.last_name}}" />
+                    </div>
+                    <div class="div--conversation-messageReply__content-container">
+                        <div class="div--conversation-messageReply__content-header">
+                            <span class="div--conversation-messageReply__content-name">{{this.first_name}} {{this.last_name}}</span>
+                            &bull;
+                            <span class="div--conversation-messageReply__content-timestamp">{{this.timestamp}}</span>
+                        </div>
+                        <div class="div--conversation-messageReply__content-details">
+                            {{this.message}}{{this.reply}}
+                        </div>
+                    </div>
+                </div>
             </div>
             {{/each}}
         </div>
         <div class="div--conversation-messagesReplies__entry-container">
             <form method="POST" action="/messageReply/{{this.selectedMessage.id}}">
                 <div class="form--messageReply-input">
-                    <textarea class="form--messageReply-input__text" rows="4" placeholder="Write a reply..." name="reply"></textarea>
-                    <input type="submit" class="form--messageReply-input__submit" value="Send" />
+                    <textarea class="form--messageReply-input__text" rows="4" placeholder="Write a message..."
+                        name="reply"></textarea>
+                    <div class="form--messageReply-input__submit-container">
+                        <input type="submit" class="form--messageReply-input__submit" value="Send" />
+                    </div>
                 </div>
             </form>
         </div>

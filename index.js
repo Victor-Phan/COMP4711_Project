@@ -1,9 +1,9 @@
-const bodyParser = require("body-parser");
-const express = require("express");
-const express_session = require("express-session");
-const path = require("path");
-const expressHbs = require("express-handlebars");
-const methodOverride = require("method-override");
+const bodyParser = require('body-parser');
+const express = require('express');
+const express_session = require('express-session');
+const path = require('path');
+const expressHbs = require('express-handlebars');
+const methodOverride = require('method-override');
 
 const {
   authRoutes,
@@ -13,10 +13,14 @@ const {
   postCommentRoutes,
   postsRoutes,
   profileLikeRoutes,
-  userRoutes
-} = require("./routes");
+  userRoutes,
+} = require('./routes');
 
-const { authHandlers, errorHandlers } = require("./utils");
+const {
+  authHandlers,
+  errorHandlers,
+  handlebarsHelpers: { ifHelper },
+} = require('./utils');
 
 const app = express();
 
@@ -26,36 +30,39 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
   express_session({
-    secret: process.env.SECRET || "keyboard cat",
+    secret: process.env.SECRET || 'keyboard cat',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
   })
 );
 
 app.engine(
-  "hbs",
+  'hbs',
   expressHbs({
-    layoutsDir: "views/layouts/",
-    defaultLayout: "main-layout",
-    extname: "hbs"
+    layoutsDir: 'views/layouts/',
+    defaultLayout: 'main-layout',
+    extname: 'hbs',
   })
 );
 
-app.set("view engine", "hbs");
-app.set("views", "views");
+const hbs = expressHbs.create({});
+hbs.handlebars.registerHelper('iff', ifHelper);
+
+app.set('view engine', 'hbs');
+app.set('views', 'views');
 
 app.use(authRoutes);
 
 // This must be after authentication routes and before secure routes
-app.use("/*", authHandlers.checkSignin);
-app.use("/*", (err, req, res, next) => {
+app.use('/*', authHandlers.checkSignin);
+app.use('/*', (err, req, res, next) => {
   if (err) {
-    if (err.message === "User not signed in") {
-      return res.redirect("/signin");
+    if (err.message === 'User not signed in') {
+      return res.redirect('/signin');
     }
     next(err);
   } else {

@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
 
-const { userController } = require("../controllers");
+const { userController } = require('../controllers');
 
 const getId = (req, res, next) => {
   const { user_id } = req.params;
@@ -11,12 +11,12 @@ const getId = (req, res, next) => {
   next();
 };
 
-router.get("/profile/edit", getId, userController.getEditPage);
+router.get('/profile/edit', getId, userController.getEditPage);
 
-router.post("/profile/edit", userController.updateProfile);
+router.post('/profile/edit', userController.updateProfile);
 
-router.get("/profile/:user_id", getId, userController.getProfile);
+router.get('/profile/:user_id', getId, userController.getProfile);
 
-router.get("/profile", getId, userController.getProfile);
+router.get('/profile', getId, userController.getProfile);
 
 module.exports = router;

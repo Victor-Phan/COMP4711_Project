@@ -1,7 +1,10 @@
 <div class="search-results--item">
   <div class="search-results--item-thumbnail">
     <a href="/profile/{{this.user_id}}">
-      <img src="{{this.image_url}}" alt="{{this.user_id}}" />
+      <<<<<<< HEAD <img src="{{this.image_url}}" alt="{{this.user_id}}" />
+      =======
+      <img class="search-userImage" src="{{this.image_url}}" alt="{{this.user_id}}" />
+      >>>>>>> dev-toggle-postcomments
     </a>
   </div>
   <div class="search-results--item-contents">
@@ -28,7 +31,7 @@
       {{#each this.postcomment}}
       <div class="post--reply-container">
         <div class="post--reply-thumbnail">
-          <img src="" alt="{{this.user_id}}" />
+          <img class="search-user-reply-img" src="" alt="{{this.user_id}}" />
         </div>
         <div class="post--reply-comment">
           {{this.comment}}
@@ -36,9 +39,18 @@
       </div>
       {{/each}}
       <form action="/postcomment/{{this.id}}" method="POST">
-        <input type="text" placeholder="add your reply..." name="comment" />
-        <input type="submit" value="Add comment" />
+        <textarea rows="4" cols="50" type="text" placeholder="add your reply..." name="comment"></textarea>
+        <input class="search-post-submit" type="submit" value="Add comment" />
       </form>
     </div>
   </div>
+  <div class="search-results--item-footer">
+    <span class="search-results--item-date">
+      {{this.timestamp}}
+    </span>
+    <span class="search-results--item-replies-count">
+      {{this.replies}} replies
+    </span>
+  </div>
+</div>
 </div>

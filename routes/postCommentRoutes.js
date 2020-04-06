@@ -1,9 +1,9 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
 
-const { postCommentController } = require("../controllers");
+const { postCommentController } = require('../controllers');
 
-router.post("/postcomment/:post_id", postCommentController.add);
+router.post('/postcomment/:post_id', postCommentController.add);
 
 module.exports = router;

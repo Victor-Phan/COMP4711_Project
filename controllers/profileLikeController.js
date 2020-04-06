@@ -1,4 +1,4 @@
-const { insertLike, removeLike } = require("../models/profilelike");
+const { insertLike, removeLike } = require('../models/profilelike');
 
 exports.toggleLike = async (req, res, next) => {
   try {
@@ -7,10 +7,10 @@ exports.toggleLike = async (req, res, next) => {
 
     const data = {
       user_profile_liked: other_user_id,
-      user_liked_profile: id
+      user_liked_profile: id,
     };
 
-    !!parseInt(isLike) ? await insertLike(data) : await removeLike(data) ;
+    !!parseInt(isLike) ? await insertLike(data) : await removeLike(data);
 
     return res.redirect(`/profile/${other_user_id}`);
   } catch (err) {

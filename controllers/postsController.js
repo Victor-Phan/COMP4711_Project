@@ -1,4 +1,4 @@
-const { postModel } = require("../models");
+const { postModel, postcommentModel } = require('../models');
 
 exports.add = async (req, res, next) => {
   try {
@@ -24,19 +24,31 @@ exports.search = async (req, res, next) => {
     } else if (subject) {
       data = await postModel.getPostsBySubject(subject);
     } else {
-      throw new Error("Invalid search");
+      throw new Error('Invalid search');
     }
 
-    return res.render(
-      "searchResults",
-      Object.assign(
-        {
-          posts: data,
+    //Get all comments within each post
+    const processedPosts = data.map(async (post) => {
+      const postcomment = await postcommentModel.getPostComments(post.id);
+
+      return {
+        ...post,
+        postcomment,
+      };
+    });
+
+    Promise.all(processedPosts)
+      .then((posts) =>
+        res.render('postList', {
+          posts,
+          ...(!!subject ? { term: subject } : {}),
+          postCSS: true,
           navbarCSS: true,
-        },
-        !!subject && { term: subject }
+        })
       )
-    );
+      .catch((err) => {
+        throw err;
+      });
   } catch (err) {
     next(err);
   }
@@ -47,7 +59,27 @@ exports.getAll = async (req, res, next) => {
     const { id } = req.session.user;
     const data = await postModel.getAllPostsByUser(id);
 
-    return res.render("postList", { posts: data, navbarCSS: true });
+    //Get all comments within each post
+    const processedPosts = data.map(async (post) => {
+      const postcomment = await postcommentModel.getPostComments(post.id);
+
+      return {
+        ...post,
+        postcomment,
+      };
+    });
+
+    Promise.all(processedPosts)
+      .then((posts) =>
+        res.render('postList', {
+          posts,
+          navbarCSS: true,
+          postCSS: true,
+        })
+      )
+      .catch((err) => {
+        throw err;
+      });
   } catch (err) {
     next(err);
   }
@@ -56,13 +88,34 @@ exports.getAll = async (req, res, next) => {
 exports.getOne = async (req, res, next) => {
   try {
     const { post_id } = req.params;
-    const data = await postModel.getPostWithAllProperties(post_id);
+    const [post] = await postModel.getPostWithAllProperties(post_id);
 
-    if (data.length == 0) {
+    if (!post) {
       throw new Error(`No such post with id: ${post_id}`);
     }
 
-    return res.render("post", { post: data[0], navbarCSS: true });
+    //Get all comments within each post
+    const processedPosts = data.map(async (post) => {
+      const postcomment = await postcommentModel.getPostComments(post.id);
+
+      return {
+        ...post,
+        postcomment,
+      };
+    });
+
+    Promise.all(processedPosts)
+      .then((posts) =>
+        res.render('postList', {
+          posts,
+          navbarCSS: true,
+          postCSS: true,
+        })
+      )
+      .catch((err) => {
+        throw err;
+      });
+
   } catch (err) {
     next(err);
   }

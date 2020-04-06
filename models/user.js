@@ -1,4 +1,4 @@
-const { promisifyQuery } = require("./helperFunctions.js");
+const { promisifyQuery } = require('./helperFunctions.js');
 
 const baseSQL = `SELECT id, first_name, last_name, email, image_url, about, country, 
                         DATE_FORMAT(dob, "%Y-%m-%d") as dob,
@@ -25,60 +25,60 @@ const baseSQL = `SELECT id, first_name, last_name, email, image_url, about, coun
                         ) post
                         ON user.id = post.user_id`;
 
-function insertUser(e) {
-    let {
-        first_name,
-        last_name,
-        email,
-        password,
-        image_url,
-        about,
-        country,
-        dob
-    } = e;
-    let sql = `INSERT INTO user (first_name, last_name, email, password, image_url, about, country, dob) 
+const insertUser = (e) => {
+  const {
+    first_name,
+    last_name,
+    email,
+    password,
+    image_url,
+    about,
+    country,
+    dob,
+  } = e;
+  const sql = `INSERT INTO user (first_name, last_name, email, password, image_url, about, country, dob) 
                VALUES ("${first_name}", "${last_name}", "${email}", "${password}", "${image_url}", "${about}", "${country}", "${dob}")`;
-    return promisifyQuery(sql);
-}
+  return promisifyQuery(sql);
+};
 
-function updateUser(e) {
-    //Cannot update password or email,
-    let { id, first_name, last_name, image_url, about, country, dob } = e;
-    let sql = `UPDATE user SET first_name = "${first_name}", 
+const updateUser = (e) => {
+  //Cannot update password or email,
+  const { id, first_name, last_name, image_url, about, country, dob } = e;
+  const sql = `UPDATE user SET first_name = "${first_name}", 
                                 last_name = "${last_name}", 
                                 image_url = "${image_url}", 
                                 about = "${about}", 
                                 country = "${country}", 
                                 dob = "${dob}" 
                                 WHERE (id = "${id}")`;
-    return promisifyQuery(sql);
-}
+  return promisifyQuery(sql);
+};
 
-function getUser(id) {
-    let sql = `SELECT * FROM user WHERE id = ${id}`;
-    return promisifyQuery(sql);
-}
+const getUser = (id) => {
+  const sql = `SELECT * FROM user WHERE id = ${id}`;
+  return promisifyQuery(sql);
+};
 
-function getUserDetails(id) {
-    let sql = `${baseSQL} WHERE id = '${id}'`;
-    return promisifyQuery(sql);
-}
+const getUserDetails = (id) => {
+  const sql = `${baseSQL} WHERE id = '${id}'`;
+  return promisifyQuery(sql);
+};
 
-function getAllUsersDetail() {
-    let sql = baseSQL;
-    return promisifyQuery(sql);
-}
+const getAllUsersDetail = () => {
+  const sql = baseSQL;
+  return promisifyQuery(sql);
+};
 
-function getUserByEmail(email) {
-    let sql = `SELECT * FROM user where email = '${email}'`;
-    return promisifyQuery(sql);
-}
+const getUserByEmail = (email) => {
+  const sql = `SELECT * FROM user where email = '${email}'`;
+  return promisifyQuery(sql);
+};
 
 module.exports = {
-    insertUser,
-    updateUser,
-    getUser,
-    getUserByEmail,
-    getUserDetails,
-    getAllUsersDetail
+  insertUser,
+  updateUser,
+  getUser,
+  getUserByEmail,
+  getUserDetails,
+  getAllUsersDetail,
 };
