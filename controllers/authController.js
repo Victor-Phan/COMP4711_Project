@@ -65,11 +65,7 @@ exports.signin = async (req, res, next) => {
   }
 };
 
-<<<<<<< HEAD
-exports.signinPage = (req, res) => res.render("landingPage", loginCSS);
-=======
-exports.signinPage = (req, res) => res.render('landingPage', {});
->>>>>>> Stylized everything according to airbnb standards
+exports.signinPage = (req, res) => res.render('landingPage', loginCSS);
 
 exports.signout = (req, res) => {
   req.session.destroy(() => console.log('User signed out'));
