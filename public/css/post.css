@@ -3,7 +3,6 @@
     max-width: 70%;
     max-height: 70%;
     position: relative;
-    top: -200px;
     margin-left: 20%;
 }
 
@@ -42,13 +41,18 @@
     margin-top: 1%;
 }
 
-.post--reply-thumbnail{
-    display: inline-block;
+.post--reply-comment{
+    display: flex;
+    position: relative;
+    left: -30px;
 }
 
-.post--reply-comment{
-    display: inline-block;
-    position: relative;
-    top: -25px;
-    left: -30px;
+.post--reply-container{
+    display: flex;
+    align-items:center;
+}
+
+.search-results--item{
+    display: flex;
+    align-items: top;
 }
