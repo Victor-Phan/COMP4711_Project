@@ -24,7 +24,7 @@
 
 .div--discussionBox-userImg {
   display: flex;
-  align-self: center;
+  align-self: top;
   justify-content: center;
   flex: 1;
 }
