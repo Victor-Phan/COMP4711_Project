@@ -44,7 +44,6 @@
 .post--reply-comment{
     display: flex;
     position: relative;
-    left: -30px;
 }
 
 .post--reply-container{

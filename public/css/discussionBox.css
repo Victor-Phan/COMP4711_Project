@@ -15,6 +15,7 @@
   display: flex;
   flex-direction: row;
   width: 50%;
+  margin-bottom: 1.5em;
 }
 
 .div--discussionBox-title__container {
@@ -24,7 +25,7 @@
 
 .div--discussionBox-userImg {
   display: flex;
-  align-self: center;
+  align-self: top;
   justify-content: center;
   flex: 1;
 }
