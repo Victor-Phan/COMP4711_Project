@@ -45,6 +45,7 @@ exports.getProfile = async (req, res, next) => {
           posts,
           user,
           hasLiked,
+          postCSS: true,
           profileCSS: true,
           navbarCSS: true,
         })
