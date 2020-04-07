@@ -28,7 +28,7 @@
       {{#each this.postcomment}}
       <div class="post--reply-container">
         <div class="post--reply-thumbnail">
-          <img class="search-user-reply-img" src="" alt="{{this.user_id}}" />
+          <img class="search-user-reply-img" src="{{this.image_url}}" alt="{{this.user_id}}" />
         </div>
         <div class="post--reply-comment">
           {{this.comment}}
@@ -40,14 +40,6 @@
         <input class="search-post-submit" type="submit" value="Add comment" />
       </form>
     </div>
-  </div>
-  <div class="search-results--item-footer">
-    <span class="search-results--item-date">
-      {{this.timestamp}}
-    </span>
-    <span class="search-results--item-replies-count">
-      {{this.replies}} replies
-    </span>
   </div>
 </div>
 </div>
