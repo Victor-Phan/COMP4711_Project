@@ -5,6 +5,10 @@ const {
   userModel,
 } = require('../models');
 
+const {
+  formatters: { completeDateFormatter },
+} = require('../utils');
+
 exports.getHomePage = async (req, res, next) => {
   try {
     const { id: user_id } = req.session.user;
@@ -21,6 +25,7 @@ exports.getHomePage = async (req, res, next) => {
 
       return {
         ...post,
+        timestamp: completeDateFormatter(post.timestamp),
         postcomment,
       };
     });

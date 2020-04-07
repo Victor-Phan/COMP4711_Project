@@ -1,15 +1,21 @@
-<div class="div-userDesc">
-    <div class="div-userInfo">
+<div class="div--userDesc-container">
+    <div class="div--userInfo-container">
         <img class="img-userPic" src="{{userDetails.image_url}}">
-        <p class="p-username">{{userDetails.first_name}} {{userDetails.last_name}}</p>
-        <p class="p-desc">{{userDetails.about}}</p>
+        <div class="div--userInfo-username">{{userDetails.first_name}} {{userDetails.last_name}}</div>
+        <div class="div--userInfo-desc">{{userDetails.about}}</div>
     </div>
-    <div class="div-userStats">
-        <ul>
-            <li><a href="/posts/">Posts</a><span> {{userDetails.postCount}}</span></li>
-            <li><a href="/messages/">Messages</a><span> {{userDetails.messageCount}}</span></li>
-            <li>Likes<span> {{userDetails.profileLikes}}</span></li>
-            <li class="li-edit"><a href="/profile/edit/">Edit Profile</a></li>
-        </ul>
+    <div class="div--userStats-container">
+        <div class="div--userStats-item" id="div--userStats-posts">
+            <a href="/posts/">Posts</a><span> {{userDetails.postCount}}</span>
+        </div>
+        <div class="div--userStats-item" id="div--userStats-messages">
+            <a href="/messages/">Messages</a><span> {{userDetails.messageCount}}</span>
+        </div>
+        <div class="div--userStats-item" id="div--userStats-profileLikes">
+            <span>Likes</span><span> {{userDetails.profileLikes}}</span>
+        </div>
+        <div class="div--userStats-item" id="div--userStats-profileEdit">
+            <a href="/profile/edit/">Edit Profile</a>
+        </div>
     </div>
 </div>

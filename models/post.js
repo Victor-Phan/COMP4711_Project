@@ -1,6 +1,6 @@
 const { promisifyQuery } = require('./helperFunctions.js');
 
-const baseSQL = `SELECT post.id, subject, type_id, message, user.id AS user_id, user.first_name, user.last_name, user.image_url, IFNULL(replies, 0) AS replies, post.timestamp
+const baseSQL = `SELECT post.id, subject, type_id, message, user.id AS user_id, user.first_name, user.last_name, user.image_url, IFNULL(replies, 0) AS replies, DATE_FORMAT(post.timestamp, "%Y/%m/%d") as timestamp, posttype.type
 FROM post 
 LEFT JOIN (
 SELECT id, first_name, last_name, image_url 
@@ -12,7 +12,12 @@ SELECT post_id, COUNT(*) AS replies
 FROM postcomment
 GROUP BY post_id
 ) postcomment
-ON post.id = postcomment.post_id`;
+ON post.id = postcomment.post_id
+LEFT JOIN (
+  SELECT *
+  FROM posttype
+) posttype
+ON posttype.id = type_id`;
 
 const insertPost = ({ user_id, type, subject, message }) => {
   const sql = `INSERT INTO post (user_id, type_id, subject, message) 

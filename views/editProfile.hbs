@@ -1,7 +1,7 @@
 <!--This page allows user to edit their profile information-->
 {{>nav_bar}}
 <div class="editProfile">
-    <form method="POST" action="/profile/edit">
+    <form class="form--edit-profile" method="POST" action="/profile/edit">
         <div class="firstName">
             <label>Edit your First Name:</label>
             <input type="text" name="first_name" value="{{user.first_name}}">
@@ -27,7 +27,7 @@
             <input type="text" name="about" value="{{user.about}}">
         </div>
         <div class="update">
-            <input type="submit" id="input" value="Update Profile" />
+            <input type="submit" id="input--submit-btn" value="Update Profile" />
         </div>
     </form>
 </div>

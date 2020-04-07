@@ -1,19 +1,23 @@
-<div class="div-discussionBox">
-  <div class="div-userImg">
+<div class="div--discussionBox-container">
+  <div class="div--discussionBox-userImg">
     <a href="/profile/{{this.user_id}}">
       <img class="img-userImage" src="{{this.image_url}}">
     </a>
   </div>
-  <div class="div-titlebox">
-    <div class="div-discussionName">{{this.subject}}</div>
-    <div class="div-subjectTopic">
-      <span class="span-topic">Topic</span>
+  <div class="div-discussionBox-content__wrapper">
+    <div class="div--discussionBox-title__container">
+      <div class="div--discussionBox-subject">{{this.subject}}</div>
+      <div class="div-subjectTopic">
+        <span class="span-topic">{{this.type}}</span>
+      </div>
+    </div>
+    <p class="p-descriptionText">{{this.message}}</p>
+    <div class="div--discussionBox-footer__container">
+      <div class="div-date">
+        {{this.timestamp}}
+      </div>
+      <div class="div-replyNum" onclick="toggle_replies(this)">{{this.replies}} Replies</div>
     </div>
   </div>
-  <p class="p-descriptionText">{{this.message}}</p>
-  <div class="div-date">
-    {{this.timestamp}}
-  </div>
-  <div class="div-replyNum" onclick="toggle_replies(this)">{{this.replies}} Replies</div>
-  {{>post_replies this}}
 </div>
+{{>post_replies this}}
