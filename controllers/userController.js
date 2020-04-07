@@ -29,11 +29,11 @@ exports.getProfile = async (req, res, next) => {
       );
       const numberOfReplies = numOfRepliesData.count;
 
-      const replies = await postcommentModel.getPostComments(post.id);
+      const postcomment = await postcommentModel.getPostComments(post.id);
 
       return {
         numberOfReplies,
-        replies,
+        postcomment,
         ...post,
       };
     });
