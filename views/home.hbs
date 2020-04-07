@@ -1,8 +1,10 @@
-<!--The main homepage for the user.
-Includes the user's dashboard, ask question box, and latest discussion list.-->
-<div class="mainPage">
-    {{> nav_bar}}
-    {{> userDashboard this}}
-    {{> askNewQuestion this}}
-    {{> discussionList this}}
+{{> nav_bar}}
+<div class="div--mainPage-container">
+    <div class="div--mainPage-dashboard">
+        {{> userDashboard this}}
+    </div>
+    <div class="div--mainPage-feed">
+        {{> askNewQuestion this}}
+        {{> discussionList this}}
+    </div>
 </div>

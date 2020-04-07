@@ -66,7 +66,7 @@ exports.getEditPage = async (req, res, next) => {
       throw new Error(`No such user with id: ${user_id}`);
     }
 
-    return res.render('editProfile', { user, navbarCSS: true });
+    return res.render('editProfile', { user, navbarCSS: true, profileEditCSS: true });
   } catch (err) {
     next(err);
   }
