@@ -39,6 +39,7 @@ exports.getHomePage = async (req, res, next) => {
           navbarCSS: true,
           homeCSS: true,
           homePageJS: true,
+          postJS: true,
         })
       )
       .catch((err) => {

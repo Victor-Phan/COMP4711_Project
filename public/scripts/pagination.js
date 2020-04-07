@@ -1,10 +1,10 @@
 var startIndex = 0;
 var numPostPerPage = 5;
-let list = document.getElementsByClassName("div-discussionBox");
+let list = document.getElementsByClassName("div--completePost-container");
 
-const showHidePosts = (list, startIndex, maxShowIndex) => {
+const showHidePosts = (list, startIndex) => {
   Array.from(list).forEach((post, index) => {
-    if (index >= startIndex && index < maxShowIndex) {
+    if (index >= startIndex && index < startIndex + numPostPerPage) {
       post.style.display = "block";
     } else {
       post.style.display = "none";
@@ -15,17 +15,15 @@ const showHidePosts = (list, startIndex, maxShowIndex) => {
 }
 
 const nextPostPage = () => {
-  let maxShowIndex = (startIndex + numPostPerPage * 2 < list.length) ? startIndex + 5 : list.length;
   if (startIndex + numPostPerPage < list.length) {
     startIndex += numPostPerPage;
   }
-  showHidePosts(list, startIndex, maxShowIndex);
+  showHidePosts(list, startIndex);
 }
 
 const prevPostPage = () => {
   startIndex = (startIndex - numPostPerPage > 0) ? startIndex - numPostPerPage : 0;
-  let maxShowIndex = (startIndex + 5 < list.length) ? startIndex + 5 : list.length;
-  showHidePosts(list, startIndex, maxShowIndex);
+  showHidePosts(list, startIndex);
 }
 
-showHidePosts(list, startIndex, 5);
+showHidePosts(list, startIndex);

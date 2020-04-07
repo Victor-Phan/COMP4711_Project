@@ -1,7 +1,7 @@
 .search-userImage{
     border-radius: 50%;
-    max-width: 70%;
-    max-height: 70%;
+    max-width: 150px;
+    max-height: 150px;
     position: relative;
     margin-left: 20%;
 }
@@ -54,4 +54,9 @@
 .search-results--item{
     display: flex;
     align-items: top;
+}
+
+.search-results--item-replies-count:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

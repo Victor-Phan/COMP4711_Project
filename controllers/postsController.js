@@ -43,6 +43,7 @@ exports.search = async (req, res, next) => {
           posts,
           ...(!!subject ? { term: subject } : {}),
           postCSS: true,
+          postJS: true,
           navbarCSS: true,
         })
       )
@@ -74,6 +75,7 @@ exports.getAll = async (req, res, next) => {
         res.render('postList', {
           posts,
           navbarCSS: true,
+          postJS: true,
           postCSS: true,
         })
       )
@@ -109,6 +111,7 @@ exports.getOne = async (req, res, next) => {
         res.render('postList', {
           posts,
           navbarCSS: true,
+          postJS: true,
           postCSS: true,
         })
       )
