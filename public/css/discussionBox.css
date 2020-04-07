@@ -1,63 +1,77 @@
-.img-userImage{
-    border-top-left-radius: 50% 50%;
-    border-top-right-radius: 50% 50%;
-    border-bottom-right-radius: 50% 50%;
-    border-bottom-left-radius: 50% 50%;
-    max-width: 70%;
-    max-height: 70%;
+.img-userImage {
+  border-radius: 50%;
+  max-width: 100%;
+  border: 2px solid white;
+  box-shadow: 0px 0px 0.5em #ccc;
 }
 
-.div-questionBox{
-    display: inline-block;
-}
-.div-discussionBox{
-    color: gray;
-    display: inline-block;
+.div-questionBox {
+  display: inline-block;
 }
 
-.div-titlebox{
-    display: inline-block;
-    position: relative;
-    width: 20%;
-    top: -60px;
+.div--discussionBox-container {
+  color: gray;
+  display: flex;
+  flex-direction: row;
+  width: 50%;
 }
 
-.div-userImg{
-    display: inline-block;
+.div--discussionBox-title__container {
+  display: flex;
+  justify-content: space-between;
 }
 
-.div-discussionName{
-    font-size: large;
-    font-weight: 600;
-    display: inline-block;
-    margin-right: 15%;
+.div--discussionBox-userImg {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  flex: 1;
 }
 
-.p-descriptionText{
-    max-width: 35%;
+.div-discussionBox-content__wrapper {
+  flex: 2;
 }
 
-.div-subjectTopic{
-    display: inline-block;
+.div--discussionBox-subject {
+  font-size: large;
+  font-weight: 600;
+  display: inline-block;
 }
 
-.div-date{
-    display: inline-block;
-    margin-right: 20%;
+.p-descriptionText {
 }
 
-.div-replyNum{
-    display: inline-block;
+.div-subjectTopic {
+  display: inline-block;
 }
 
-.span-topic{
-    background-color: white;
-    color: #38a3eb;
-    padding: 2px 5px;
-    margin: 1px 0;
-    border-color: #38a3eb;
+.div--discussionBox-footer__container {
+    display: flex;
+    font-size: smaller;
+    justify-content: space-between;
+}
+
+.div-date {
+  display: inline-block;
+}
+
+.div-replyNum {
+  display: inline-block;
+}
+
+.span-topic {
+  background-color: white;
+  color: #38a3eb;
+  padding: 2px 5px;
+  margin: 1px 0;
+  border: 2px solid #38a3eb;
+  cursor: pointer;
+  width: 30%;
+  opacity: 0.9;
+  border-style: solid;
+}
+
+.div-replyNum:hover {
+    text-decoration: underline;
     cursor: pointer;
-    width: 30%;
-    opacity: 0.9;
-    border-style: solid;
 }

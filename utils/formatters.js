@@ -18,6 +18,14 @@ const dateFormatter = (rawDate) => {
   return `${monthNames[processedDate.getMonth()]} ${processedDate.getDate()}`;
 };
 
+const completeDateFormatter = (rawDate) => {
+  const processedDate = new Date(rawDate);
+  return `${processedDate.getDate()} ${
+    monthNames[processedDate.getMonth()]
+  } ${processedDate.getFullYear()}`;
+};
+
 module.exports = {
+  completeDateFormatter,
   dateFormatter,
 };
